@@ -2,12 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "domain-exporter.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "domain-exporter.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "domain-exporter.selectorLabels" . | nindent 6 }}
@@ -33,6 +31,14 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          args:
+            [
+              "--config=/etc/domain-exporter/domains.yaml",
+              "--bind=:{{ .Values.port }}",
+              "--log.level=info",
+            ]
           ports:
             - name: http
               containerPort: 80
@@ -45,8 +51,15 @@ spec:
             httpGet:
               path: /
               port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: config
+              mountPath: /etc/domain-exporter
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            defaultMode: 0600
+            name: {{ include "domain-exporter.fullname" . }}-domains
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

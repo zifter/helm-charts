@@ -1,0 +1,40 @@
+{{ if .Values.alerts.enabled }}
+kind: PrometheusRule
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: {{ include "domain-exporter.fullname" . }}-alerts
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "domain-exporter.labels" . | nindent 4 }}
+spec:
+  groups:
+    - name: DomainExpiration
+      rules:
+        - alert: DomainExpiringWarning
+          expr: domain_expiry_days < {{ .Values.alerts.expiration.warning }}
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            description: >-
+              Domain {{`{{`}}$labels.domain{{`}}`}} will expire in less than {{ .Values.alerts.expiration.warning }} days
+            summary: >-
+              {{`{{`}}$labels.domain{{`}}`}}: domain is expiring
+        - alert: DomainExpiringCritical
+          expr: domain_expiry_days < {{ .Values.alerts.expiration.critical }}
+          for: 1h
+          labels:
+            severity: critical
+          annotations:
+            description: >-
+              Domain {{`{{`}}$labels.domain{{`}}`}} will expire in less than {{ .Values.alerts.expiration.critical }} days
+            summary: >-
+              {{`{{`}}$labels.domain{{`}}`}}: domain is expiring
+        - alert: DomainMetricsAbsent
+          expr: absent(domain_expiration) > 0
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            description: "Metrics for domain-exporter are absent"
+{{ end }}
