@@ -6,6 +6,7 @@ metadata:
   labels:
     {{- include "domain-exporter.labels" . | nindent 4 }}
 spec:
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "domain-exporter.selectorLabels" . | nindent 6 }}

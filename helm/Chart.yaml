@@ -1,6 +1,6 @@
 apiVersion: v2
 name: domain-exporter
-description: A Helm chart of domain exporter
+description: A Helm chart of domain exporter. Provide prometheus metrics, alerts and dashboard.
 type: application
 version: 0.1.0
 appVersion: "0.1.8"

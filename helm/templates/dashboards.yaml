@@ -1,0 +1,16 @@
+{{ if .Values.dashboards.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "domain-exporter.fullname" . }}-dashboards
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "domain-exporter.labels" . | nindent 4 }}
+  annotations:
+    {{ if .Values.dashboards.targetFolder }}
+    k8s-sidecar-target-directory: "{{ .Values.dashboards.targetFolder }}"
+    {{ end }}
+data:
+  domain-exporter.json:
+    {{ .Files.Get "dashboards/domain-expiration-status.json" | toPrettyJson }}
+{{ end }}
