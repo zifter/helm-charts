@@ -1,0 +1,9 @@
+
+# Created by https://www.toptal.com/developers/gitignore/api/helm,pycharm
+# Edit at https://www.toptal.com/developers/gitignore?templates=helm,pycharm
+
+### Helm ###
+# Chart dependencies
+**/charts/*.tgz
+
+.idea

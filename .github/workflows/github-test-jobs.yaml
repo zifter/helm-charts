@@ -14,4 +14,12 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+      - name: Lint Helm
+        uses: WyriHaximus/github-action-helm3@v2
+        with:
+          exec: helm lint ./.helm/
+      - name: Template Helm
+        uses: WyriHaximus/github-action-helm3@v2
+        with:
+          exec: helm template test ./.helm/
       - run: echo "🍏 This job's status is ${{ job.status }}."
