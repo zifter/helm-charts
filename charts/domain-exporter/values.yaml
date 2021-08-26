@@ -81,8 +81,8 @@ affinity: {}
 alerts:
   enabled: true
   expiration:
-    warning: 60 # days
-    critical: 5 # days
+    warning: 60  # days
+    critical: 5  # days
 
 dashboards:
   enabled: true

@@ -7,5 +7,6 @@ echo "WORKDIR ${WORKDIR}"
 echo "REPO_DIR ${REPO_DIR}"
 
 for values in $WORKDIR/*.yaml; do
-  helm template $REPO_DIR/.helm -f $values 1> /dev/null
+  echo "template $values"
+  helm template $REPO_DIR/charts/domain-exporter -f $values 1> /dev/null
 done
