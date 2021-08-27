@@ -1,0 +1,8 @@
+dashboards:
+  targetFolder: "domains"
+
+domains:
+  - google.com
+  - habr.ru
+  - github.com
+  - belarus-is-free-country.net

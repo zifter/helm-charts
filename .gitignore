@@ -4,6 +4,6 @@
 
 ### Helm ###
 # Chart dependencies
-**/charts/*.tgz
+*.tgz
 
 .idea

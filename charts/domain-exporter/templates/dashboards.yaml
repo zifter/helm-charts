@@ -5,11 +5,12 @@ metadata:
   name: {{ include "domain-exporter.fullname" . }}-dashboards
   namespace: {{ .Release.Namespace }}
   labels:
+    {{- .Values.dashboards.label | toYaml | nindent 4 }}
     {{- include "domain-exporter.labels" . | nindent 4 }}
   annotations:
-    {{ if .Values.dashboards.targetFolder }}
+    {{- if .Values.dashboards.targetFolder }}
     k8s-sidecar-target-directory: "{{ .Values.dashboards.targetFolder }}"
-    {{ end }}
+    {{- end }}
 data:
   domain-exporter.json:
     {{ .Files.Get "dashboards/domain-expiration-status.json" | toPrettyJson }}

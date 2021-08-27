@@ -1,0 +1,68 @@
+metrics-server:
+  enabled: true
+
+prometheusOperator:
+  resources:
+    limits:
+      cpu: 100m
+      memory: 150Mi
+    requests:
+      cpu: 10m
+      memory: 75Mi
+
+# Prometheus settings
+prometheus:
+  prometheusSpec:
+    routePrefix: "/prometheus"
+    # allow discovery of third party service monitor
+    serviceMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    resources:
+      limits:
+        cpu: 200m
+        memory: 500Mi
+      requests:
+        cpu: 100m
+        memory: 400Mi
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - localhost
+    paths:
+      - "/prometheus(/|$)(.*)"
+
+# Alertmanager settings
+alertmanager:
+  enabled: true
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+      - localhost
+    paths:
+      - "/alertmanager(/|$)(.*)"
+
+# Grafana settings
+grafana:
+  enabled: true
+  adminUser: admin
+  adminPassword: admin
+
+  grafana.ini:
+    server:
+      domain: localhost
+      root_url: http://localhost:1080/grafana/
+      serve_from_sub_path: true
+
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+      - localhost
+    path: "/grafana(/|$)(.*)"
