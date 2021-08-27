@@ -78,7 +78,7 @@ tolerations: []
 
 affinity: {}
 
-alerts:
+rules:
   enabled: true
   expiration:
     warning: 60  # days
@@ -86,6 +86,9 @@ alerts:
 
 dashboards:
   enabled: true
+  label:
+    # default grafana dashboard discovery label
+    grafana_dashboard: '1'
   targetFolder: ""
 
 metrics:

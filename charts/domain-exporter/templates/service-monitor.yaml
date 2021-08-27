@@ -10,7 +10,10 @@ spec:
   selector:
     matchLabels:
       {{- include "domain-exporter.selectorLabels" . | nindent 6 }}
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
   endpoints:
-  - port: web
+  - port: http
     path: /metrics
 {{ end }}

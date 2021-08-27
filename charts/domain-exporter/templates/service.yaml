@@ -6,11 +6,10 @@ metadata:
   labels:
     {{- include "domain-exporter.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  selector:
+    {{- include "domain-exporter.selectorLabels" . | nindent 4 }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: 9203
       targetPort: http
       protocol: TCP
       name: http
-  selector:
-    {{- include "domain-exporter.selectorLabels" . | nindent 4 }}

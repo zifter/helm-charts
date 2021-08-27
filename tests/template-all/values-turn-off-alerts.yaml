@@ -1,4 +1,4 @@
-alerts:
+rules:
   enabled: false
 
 

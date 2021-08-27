@@ -1,0 +1,51 @@
+{{ if .Values.rules.enabled }}
+kind: PrometheusRule
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: {{ include "domain-exporter.fullname" . }}-rules
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "domain-exporter.labels" . | nindent 4 }}
+spec:
+  groups:
+    - name: DomainExpiration
+      rules:
+        - alert: DomainMetricsAbsent
+          expr: absent(domain_expiration) > 0
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            description: "Metrics for domain-exporter are absent"
+
+        - alert: DomainExpiringWarning
+          expr: domain_expiry_days < {{ .Values.rules.expiration.warning }}
+          for: 1h
+          labels:
+            severity: warning
+          annotations:
+            description: >-
+              Domain {{`{{`}}$labels.domain{{`}}`}} will expire in less than {{ .Values.rules.expiration.warning }} days
+            summary: >-
+              {{`{{`}}$labels.domain{{`}}`}}: domain is expiring
+
+        - alert: DomainExpiringCritical
+          expr: domain_expiry_days < {{ .Values.rules.expiration.critical }}
+          for: 1h
+          labels:
+            severity: critical
+          annotations:
+            description: >-
+              Domain {{`{{`}}$labels.domain{{`}}`}} will expire in less than {{ .Values.rules.expiration.critical }} days
+            summary: >-
+              {{`{{`}}$labels.domain{{`}}`}}: domain is expiring
+
+        - alert: DomainUnfindable
+          expr: domain_expiration_unfindable > 0
+          for: 24h
+          labels:
+            severity: critical
+          annotations:
+            description: >-
+              Unable to find or parse expiry for {{`{{`}}$labels.domain{{`}}`}}
+{{ end }}
