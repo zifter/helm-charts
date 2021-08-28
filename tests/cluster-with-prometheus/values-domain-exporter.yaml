@@ -5,4 +5,28 @@ domains:
   - google.com
   - habr.ru
   - github.com
-  - belarus-is-free-country.net
+  - tut.by
+  - cnn.com
+  - gitignore.io
+  - gosuslugi.ru
+  - vaikutis.lt
+  - www.reddit.com
+  - amazon.pl
+  - amazon.com
+  - olx.ua
+  - ok.ru
+  - censor.net
+  - mail.ru
+  - aliexpress.ru
+  - domain-is-not-found.net
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  hosts:
+    - host: localhost
+      paths:
+        - path: "/domain-exporter(/|$)(.*)"
+          pathType: Prefix
