@@ -1,0 +1,24 @@
+apiVersion: v1
+entries:
+  domain-exporter:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-08-29T21:27:13.95155501Z"
+    description: A Helm chart of domain exporter. Provide prometheus metrics, alerts
+      and dashboard.
+    digest: fdd6d25002eb80e9ebb12d66f21500e524e97b9607f112a0bb0cd10e89a6a3db
+    home: https://github.com/zifter/helm-domain-exporter
+    icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
+    maintainers:
+    - email: zifter.ai+github@gmail.com
+      name: zifter
+      url: https://github.com/zifter
+    name: domain-exporter
+    sources:
+    - https://github.com/zifter/helm-domain-exporter
+    - https://github.com/zifter/domain_exporter
+    type: application
+    urls:
+    - https://github.com/zifter/domain-exporter-helm/releases/download/domain-exporter-0.2.0/domain-exporter-0.2.0.tgz
+    version: 0.2.0
+generated: "2021-08-29T21:27:13.95156161Z"
