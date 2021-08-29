@@ -11,7 +11,7 @@ spec:
     - name: DomainExpiration
       rules:
         - alert: DomainMetricsAbsent
-          expr: absent(domain_expiration) > 0
+          expr: absent(domain_expiry_days) > 0
           for: 1h
           labels:
             severity: warning
@@ -19,7 +19,7 @@ spec:
             description: "Metrics for domain-exporter are absent"
 
         - alert: DomainExpiringWarning
-          expr: domain_expiry_days < {{ .Values.rules.expiration.warning }}
+          expr: {{ .Values.rules.expiration.critical }} < domain_expiry_days <= {{ .Values.rules.expiration.warning }}
           for: 1h
           labels:
             severity: warning
@@ -30,7 +30,7 @@ spec:
               {{`{{`}}$labels.domain{{`}}`}}: domain is expiring
 
         - alert: DomainExpiringCritical
-          expr: domain_expiry_days < {{ .Values.rules.expiration.critical }}
+          expr: 0 <= domain_expiry_days <= {{ .Values.rules.expiration.critical }}
           for: 1h
           labels:
             severity: critical
@@ -40,8 +40,8 @@ spec:
             summary: >-
               {{`{{`}}$labels.domain{{`}}`}}: domain is expiring
 
-        - alert: DomainUnfindable
-          expr: domain_expiration_unfindable > 0
+        - alert: DomainProbeFailed
+          expr: domain_probe_success == 0
           for: 24h
           labels:
             severity: critical

@@ -16,4 +16,5 @@ spec:
   endpoints:
   - port: http
     path: /metrics
+    interval: {{ .Values.metrics.interval }}
 {{ end }}

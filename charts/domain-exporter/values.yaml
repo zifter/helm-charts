@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: quay.io/shift/domain_exporter
+  repository: zifter/domain_exporter
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -93,6 +93,7 @@ dashboards:
 
 metrics:
   enabled: true
+  interval: 1m
 
 domains:
   - google.com
