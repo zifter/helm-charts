@@ -78,7 +78,7 @@
       "pluginVersion": "7.4.1",
       "targets": [
         {
-          "expr": "domain_expiration",
+          "expr": "domain_expiry_days",
           "instant": false,
           "interval": "",
           "legendFormat": "{{domain}}",
@@ -152,7 +152,7 @@
       "pluginVersion": "7.4.1",
       "targets": [
         {
-          "expr": "domain_expiration_unfindable{}==1",
+          "expr": "domain_probe_success{}==0",
           "format": "time_series",
           "instant": false,
           "interval": "",

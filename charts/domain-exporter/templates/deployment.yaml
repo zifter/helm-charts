@@ -38,7 +38,6 @@ spec:
             [
               "--config=/etc/domain-exporter/domains.yaml",
               "--bind=:9203",
-              "--log.level=info",
             ]
           ports:
             - name: http
