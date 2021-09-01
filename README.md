@@ -1,5 +1,10 @@
 # zifter's helm charts
 
+Add helm repository 
+```bash
+helm repo add zifter https://github.com/zifter/helm-charts
+```
+
 ## List of helm charts
 * [domain-exporter](charts/domain-exporter/README.md)
 
