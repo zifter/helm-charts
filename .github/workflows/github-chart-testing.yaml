@@ -7,14 +7,10 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}/tests/template-all
-
       - name: Run Tests
         uses: WyriHaximus/github-action-helm3@v2
         with:
-          exec: ${{ github.workspace }}/tests/template-all/run.sh
+          exec: ${{ github.workspace }}/run-tests.sh
 
   Helm-Lint:
     runs-on: ubuntu-latest

@@ -2,4 +2,4 @@ Congratulations! Domain exporter metrics is ready to use :)
 
 Explore dashboard "Domain Exporter" in Grafana
 
-For more information visit, please visit https://github.com/zifter/helm-domain-exporter
+For more information visit, please visit https://github.com/zifter/helm-charts

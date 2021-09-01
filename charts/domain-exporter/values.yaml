@@ -87,11 +87,11 @@ rules:
   # Alert with warning severity if expiration time is less then provided
   warning:
     enabled: true
-    expiration: 60 # days
+    expiration: 60  # days
   # Alert with critical severity alert if expiration time is less then provided
   critical:
     enabled: true
-    expiration: 5 # days
+    expiration: 5  # days
   # Alert on failure to detect expiration time
   failed:
     enabled: true

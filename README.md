@@ -1,19 +1,22 @@
-# Helm chart for domain exporter
+# zifter helm charts
 
-# Usage
-To install domain-exporter you need:
-Add helm repository 
-```bash
-helm repo add zifter-charts https://zifter.github.io/domain-exporter-helm/
-```
+## List of helm charts
+* [domain-exporter](charts/domain-exporter/README.md)
 
-Install chart with necessary domains list to specific namespace, where prometheus-operator will be able to discover rules, 
-service monitor and etc: 
-```bash
-helm install domain-exporter zifter-charts/domain-exporter --namespace monitoring --set "domains={google.com,reddit.com,amazon.com}"
-```
-
-Be aware, prometheus CRD must be installed before installing this chart.
-
-# Testing helm charts
+## Contributing
+### Testing helm charts
 Install [ct](https://github.com/helm/chart-testing/releases)
+```bash
+ct liby
+```
+
+### Generate values.schema.json
+Install special plugin to generate schema
+```bash
+helm plugin install https://github.com/karuppiah7890/helm-schema-gen.git
+```
+
+```bash
+helm schema-gen tests/template-all/values-full.yaml > values.schema.json
+```
+
