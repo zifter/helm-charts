@@ -12,8 +12,10 @@ spec:
       {{- include "domain-exporter.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
+        # Roll out new version if configuration file was changed
+        checksum/config: {{ .Values.domains | toYaml | sha256sum }}
+      {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:

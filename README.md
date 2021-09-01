@@ -1,9 +1,4 @@
-# helm-domain-exporter
-Helm chart for domain exporter
-
-# testing
-Install ct
-https://github.com/helm/chart-testing/releases
+# Helm chart for domain exporter
 
 # Usage
 To install domain-exporter you need:
@@ -19,3 +14,6 @@ helm install domain-exporter zifter-charts/domain-exporter --namespace monitorin
 ```
 
 Be aware, prometheus CRD must be installed before installing this chart.
+
+# Testing helm charts
+Install [ct](https://github.com/helm/chart-testing/releases)

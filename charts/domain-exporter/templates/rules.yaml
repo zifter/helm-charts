@@ -10,6 +10,7 @@ spec:
   groups:
     - name: DomainExpiration
       rules:
+{{- if .Values.rules.absent.enabled }}
         - alert: DomainMetricsAbsent
           expr: absent(domain_expiry_days) > 0
           for: 1h
@@ -17,29 +18,35 @@ spec:
             severity: warning
           annotations:
             description: "Metrics for domain-exporter are absent"
+{{- end }}
 
+{{- if .Values.rules.warning.enabled }}
         - alert: DomainExpiringWarning
-          expr: {{ .Values.rules.expiration.critical }} < domain_expiry_days <= {{ .Values.rules.expiration.warning }}
+          expr: {{ .Values.rules.critical.expiration }} < domain_expiry_days <= {{ .Values.rules.warning.expiration }}
           for: 1h
           labels:
             severity: warning
           annotations:
             description: >-
-              Domain {{`{{`}}$labels.domain{{`}}`}} will expire in less than {{ .Values.rules.expiration.warning }} days
+              Domain {{`{{`}}$labels.domain{{`}}`}} will expire in less than {{ .Values.rules.warning.expiration }} days
             summary: >-
               {{`{{`}}$labels.domain{{`}}`}}: domain is expiring
+{{- end }}
 
+{{- if .Values.rules.critical.enabled }}
         - alert: DomainExpiringCritical
-          expr: 0 <= domain_expiry_days <= {{ .Values.rules.expiration.critical }}
+          expr: 0 <= domain_expiry_days <= {{ .Values.rules.critical.expiration }}
           for: 1h
           labels:
             severity: critical
           annotations:
             description: >-
-              Domain {{`{{`}}$labels.domain{{`}}`}} will expire in less than {{ .Values.rules.expiration.critical }} days
+              Domain {{`{{`}}$labels.domain{{`}}`}} will expire in less than {{ .Values.rules.critical.expiration }} days
             summary: >-
               {{`{{`}}$labels.domain{{`}}`}}: domain is expiring
+{{- end }}
 
+{{- if .Values.rules.failed.enabled }}
         - alert: DomainProbeFailed
           expr: domain_probe_success == 0
           for: 24h
@@ -48,4 +55,6 @@ spec:
           annotations:
             description: >-
               Unable to find or parse expiry for {{`{{`}}$labels.domain{{`}}`}}
-{{ end }}
+{{- end }}
+
+{{- end }}

@@ -5,7 +5,7 @@ metadata:
   name: {{ include "domain-exporter.fullname" . }}-dashboards
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- .Values.dashboards.label | toYaml | nindent 4 }}
+    {{- .Values.dashboards.labels | toYaml | nindent 4 }}
     {{- include "domain-exporter.labels" . | nindent 4 }}
   annotations:
     {{- if .Values.dashboards.targetFolder }}

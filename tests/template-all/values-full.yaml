@@ -63,9 +63,16 @@ affinity: {}
 
 rules:
   enabled: true
-  expiration:
-    warning: 60  # days
-    critical: 5  # days
+  absent:
+    enabled: true
+  warning:
+    enabled: true
+    expiration: 60 # days
+  critical:
+    enabled: true
+    expiration: 5 # days
+  failed:
+    enabled: true
 
 dashboards:
   enabled: true
