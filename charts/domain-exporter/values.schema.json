@@ -175,16 +175,43 @@
         "rules": {
             "type": "object",
             "properties": {
+                "absent": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "critical": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "expiration": {
+                            "type": "integer"
+                        }
+                    }
+                },
                 "enabled": {
                     "type": "boolean"
                 },
-                "expiration": {
+                "failed": {
                     "type": "object",
                     "properties": {
-                        "critical": {
-                            "type": "integer"
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "warning": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
                         },
-                        "warning": {
+                        "expiration": {
                             "type": "integer"
                         }
                     }
