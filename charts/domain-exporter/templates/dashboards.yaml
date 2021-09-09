@@ -13,5 +13,5 @@ metadata:
     {{- end }}
 data:
   domain-exporter.json:
-    {{ .Files.Get "dashboards/domain-expiration-status.json" | toPrettyJson }}
+    {{ .Files.Get "dashboards/domain-expiration-overview.json" | toPrettyJson }}
 {{ end }}
