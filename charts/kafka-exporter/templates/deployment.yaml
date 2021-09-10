@@ -1,47 +1,55 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "domain-exporter.fullname" . }}
+  name: {{ include "kafka-exporter.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "domain-exporter.labels" . | nindent 4 }}
+    {{- include "kafka-exporter.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "domain-exporter.selectorLabels" . | nindent 6 }}
+      {{- include "kafka-exporter.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
-        # Roll out new version if configuration file was changed
-        checksum/config: {{ .Values.domains | toYaml | sha256sum }}
       {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "domain-exporter.selectorLabels" . | nindent 8 }}
+        {{- include "kafka-exporter.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "domain-exporter.serviceAccountName" . }}
+      serviceAccountName: {{ include "kafka-exporter.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
+      {{- range .Values.kafka }}
+        - name: {{ $.Chart.Name }}-{{ .name  | lower | replace "_" "-" }}
           securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+            {{- toYaml $.Values.securityContext | nindent 12 }}
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml $.Values.resources | nindent 12 }}
           args:
-            - --config=/etc/domain-exporter/domains.yaml
-            - --bind=:9203
+            {{- if .user }}
+            - --sasl.enabled
+            - --sasl.username
+            - {{ .user }}
+            - --sasl.password
+            - {{ .password }}
+            {{- end }}
+            {{- range required "Brokers must be set!" .brokers }}
+            - --kafka.server
+            - {{ . }}
+            {{- end }}
           ports:
             - name: http
-              containerPort: 9203
+              containerPort: 9308
               protocol: TCP
 #          livenessProbe:
 #            httpGet:
@@ -51,15 +59,7 @@ spec:
 #            httpGet:
 #              path: /
 #              port: http
-          volumeMounts:
-            - name: config
-              mountPath: /etc/domain-exporter
-              readOnly: true
-      volumes:
-        - name: config
-          configMap:
-            defaultMode: 0600
-            name: {{ include "domain-exporter.fullname" . }}-domains
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

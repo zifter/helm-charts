@@ -1,4 +1,4 @@
-Congratulations! Domain exporter metrics is ready to use :)
+Congratulations! Domain exporter is ready to use :)
 
 Explore dashboard "Domain Expiration Overview" in Grafana!
 

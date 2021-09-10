@@ -1,4 +1,4 @@
-metrics-server:
+vametrics-server:
   enabled: true
 
 prometheusOperator:

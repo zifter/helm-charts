@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-REPO_DIR=$(realpath "$(dirname "$0")")
+WORKDIR=$(realpath "$(dirname "$0")")
+REPO_DIR=$(realpath "${WORKDIR[*]}/../")
+echo "WORKDIR ${WORKDIR}"
 echo "REPO_DIR ${REPO_DIR}"
 
 for chart in $REPO_DIR/charts/*/; do
