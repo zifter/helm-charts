@@ -1,14 +1,14 @@
 apiVersion: v2
-name: domain-exporter
-description: A Helm chart of domain exporter. Provide prometheus metrics, alerts and dashboard.
+name: kafka-exporter
+description: A Helm chart of kafka exporter. Provide prometheus metrics, alerts and dashboard.
 type: application
-version: 0.3.1
+version: 0.1.0
 appVersion: "latest"
 icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
 home: https://github.com/zifter/helm-charts
 sources:
-  - https://github.com/zifter/helm-charts/tree/main/charts/domain-exporter
-  - https://github.com/caarlos0/domain_exporter
+  - https://github.com/zifter/helm-charts/tree/main/charts/kafka-exporter
+  - https://github.com/danielqsj/kafka_exporter
 maintainers:
   - name: zifter
     email: zifter.ai+github@gmail.com

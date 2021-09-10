@@ -1,0 +1,5 @@
+Congratulations! Kafka exporter is ready to use :)
+
+Explore dashboard "Kafka Overview" in Grafana!
+
+For more information visit, please visit https://github.com/zifter/helm-charts

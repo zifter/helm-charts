@@ -1,0 +1,69 @@
+repositories:
+- name: ingress-nginx
+  url: https://kubernetes.github.io/ingress-nginx
+- name: prometheus-community
+  url: https://prometheus-community.github.io/helm-charts
+- name: bitnami
+  url: https://charts.bitnami.com/bitnami
+
+helmDefaults:
+  wait: true
+  timeout: 300
+
+commonLabels:
+  tier: monitoring
+
+releases:
+  - name: prometheus
+    namespace: monitoring
+    chart: prometheus-community/kube-prometheus-stack
+    version: 18.0.1
+    values:
+      - releases/values-prometheus-stack.yaml
+
+  - name: ingress-nginx
+    namespace: kube-system
+    chart: ingress-nginx/ingress-nginx
+    version: 3.36.0
+    values:
+      - releases/values-ingress-nginx.yaml
+    needs:
+      - prometheus
+
+  # Domain exporter
+  - name: domain-exporter
+    namespace: monitoring
+    chart: ../../charts/domain-exporter
+    condition: domainExporter.enabled
+    values:
+      - releases/values-domain-exporter.yaml
+    needs:
+      - prometheus
+      - ingress-nginx
+
+  # Kafka exporter
+  - name: kafka-exporter
+    namespace: monitoring
+    chart: ../../charts/kafka-exporter
+    condition: kafkaExporter.enabled
+    values:
+      - releases/values-kafka-exporter.yaml
+    needs:
+      - prometheus
+      - ingress-nginx
+
+  - name: kafka
+    namespace: test
+    chart: bitnami/kafka
+    version: 14.1.0
+    condition: kafkaExporter.enabled
+    values:
+      - releases/values-kafka.yaml
+
+environments:
+  default:
+    values:
+      - kafkaExporter:
+          enabled: true
+      - domainExporter:
+          enabled: true
