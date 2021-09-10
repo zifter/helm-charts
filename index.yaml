@@ -3,6 +3,26 @@ entries:
   domain-exporter:
   - apiVersion: v2
     appVersion: latest
+    created: "2021-09-10T21:41:08.553963198Z"
+    description: A Helm chart of domain exporter. Provide prometheus metrics, alerts
+      and dashboard.
+    digest: e04b5d7161ba1dbe9e211e5c8b1b23930daf7a8838ca1282e5923ae6d5af7f46
+    home: https://github.com/zifter/helm-charts
+    icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
+    maintainers:
+    - email: zifter.ai+github@gmail.com
+      name: zifter
+      url: https://github.com/zifter
+    name: domain-exporter
+    sources:
+    - https://github.com/zifter/helm-charts/tree/main/charts/domain-exporter
+    - https://github.com/caarlos0/domain_exporter
+    type: application
+    urls:
+    - https://github.com/zifter/helm-charts/releases/download/domain-exporter-0.3.1/domain-exporter-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-09-09T21:17:05.084825773Z"
     description: A Helm chart of domain exporter. Provide prometheus metrics, alerts
       and dashboard.
@@ -124,4 +144,25 @@ entries:
     urls:
     - https://github.com/zifter/domain-exporter-helm/releases/download/domain-exporter-0.2.0/domain-exporter-0.2.0.tgz
     version: 0.2.0
-generated: "2021-09-09T21:17:05.084846473Z"
+  kafka-exporter:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2021-09-10T21:41:08.670685837Z"
+    description: A Helm chart of kafka exporter. Provide prometheus metrics, alerts
+      and dashboard.
+    digest: 78f859895ec938275dfad80fc27edcdbb90c929d635e33205cd9f48c39e4b6eb
+    home: https://github.com/zifter/helm-charts
+    icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
+    maintainers:
+    - email: zifter.ai+github@gmail.com
+      name: zifter
+      url: https://github.com/zifter
+    name: kafka-exporter
+    sources:
+    - https://github.com/zifter/helm-charts/tree/main/charts/kafka-exporter
+    - https://github.com/danielqsj/kafka_exporter
+    type: application
+    urls:
+    - https://github.com/zifter/helm-charts/releases/download/kafka-exporter-0.1.0/kafka-exporter-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-09-10T21:41:08.670718237Z"
