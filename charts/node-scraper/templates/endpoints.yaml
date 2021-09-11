@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: {{ include "node-scraper.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "node-scraper.labels" . | nindent 4 }}
+subsets:
+{{- range .Values.endpoints }}
+  - addresses:
+      - ip: {{ required "Ip address is required to be!" .ip }}
+        nodeName: {{ required "Node name is required to be!" .nodeName }}
+    ports:
+      - name: metrics
+        port: {{ .port | default 9100 }}
+        protocol: TCP
+{{- end }}

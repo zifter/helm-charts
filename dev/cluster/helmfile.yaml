@@ -68,10 +68,21 @@ releases:
     values:
       - releases/values-kafka-sasl.yaml
 
+  # Node scraper
+  - name: node-scraper
+    namespace: monitoring
+    chart: ../../charts/node-scraper
+    version: 14.1.0
+    condition: nodeScraper.enabled
+    values:
+      - releases/values-node-scraper.yaml
+
 environments:
   default:
     values:
       - kafkaExporter:
           enabled: true
       - domainExporter:
+          enabled: true
+      - nodeScraper:
           enabled: true

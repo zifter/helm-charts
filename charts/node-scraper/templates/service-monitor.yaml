@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "node-scraper.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "node-scraper.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "node-scraper.selectorLabels" . | nindent 6 }}
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
+  # jobLabel: jobLabel
+  endpoints:
+  - port: metrics
+    scheme: http
+    interval: {{ .Values.metrics.interval }}
+    relabelings:
+      - sourceLabels: [__meta_kubernetes_endpoint_node_name]
+        targetLabel: instance

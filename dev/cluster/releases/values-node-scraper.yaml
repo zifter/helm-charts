@@ -1,0 +1,3 @@
+endpoints:
+ - nodeName: control-plane
+   ip: 172.18.0.2

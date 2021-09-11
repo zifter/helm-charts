@@ -1,0 +1,10 @@
+nameOverride: ""
+fullnameOverride: ""
+
+endpoints:
+- nodeName: host-name-1
+  ip: 127.0.0.1
+  port: 9100
+- nodeName: host-name-2
+  ip: 127.0.0.2
+  port: 9123
