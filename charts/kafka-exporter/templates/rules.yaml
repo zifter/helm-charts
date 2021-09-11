@@ -8,7 +8,7 @@ metadata:
     {{- include "kafka-exporter.labels" . | nindent 4 }}
 spec:
   groups:
-    - name: DomainExpiration
+    - name: Kafka
       rules:
 {{- if .Values.rules.minReplicas.enabled }}
         - alert: KafkaTooSmallReplicas

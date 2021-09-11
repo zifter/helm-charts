@@ -1,0 +1,81 @@
+{{ if .Values.rules.enabled }}
+kind: PrometheusRule
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: {{ include "clickhouse-exporter.fullname" . }}-rules
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "clickhouse-exporter.labels" . | nindent 4 }}
+spec:
+  groups:
+    - name: Clickhouse
+      rules:
+        - alert: ClickhouseDown
+          expr: clickhouse_uptime == 0
+          for: 0m
+          labels:
+            severity: critical
+          annotations:
+            summary: Clickhouse down (instance {{`{{`}} $labels.instance {{`}}`}})
+            description: Clickhouse instance is down\n  VALUE = {{`{{`}} $value {{`}}`}}\n  LABELS= {{`{{`}} $labels {{`}}`}}
+
+        - alert: ClickhouseRestartRecently
+          expr: clickhouse_uptime > 1 < {{ .Values.rules.restartRecently }}
+          labels:
+            severity: critical
+          annotations:
+            summary: "Uptime is less than 1 minute. Looks like the Clickhouse has been restarted"
+            description: |-
+              Look to previous Clickhouse pod log to investigate restart reason
+
+        - alert: ClickhouseContextLockWait
+          expr: increase(clickhouse_context_lock_wait[10m]) > {{ .Values.rules.contextLockWait }}
+          labels:
+            severity: high
+          for: 60s
+          annotations:
+            summary: "Amount of Clickhouse Context Lock Wait has been increased during last 10 minutes"
+            description: |-
+              Look to Clickhouse pod log to investigate the reason of increased Clickhouse Context Lock Wait
+
+        - alert: ClickhouseCannotRemoveEphemeralNodeTotal
+          expr: increase(clickhouse_cannot_remove_ephemeral_node_total[10m]) > {{ .Values.rules.cannotRemoveEphemeralNodeTotal }}
+          labels:
+            severity: high
+          for: 60s
+          annotations:
+            summary: "Events like Clickhouse Cannot Remove Ephemeral Node Total has been increased during last 1 minutes"
+            description: |-
+              Look to Clickhouse pod log to investigate the reason of increased Clickhouse Context Lock Wait
+
+        - alert: ClickhouseDelayedInserts
+          expr: increase(clickhouse_delayed_inserts[10m]) > {{ .Values.rules.delayedInserts }}
+          labels:
+            severity: high
+          for: 120s
+          annotations:
+            summary: "Amount of Clickhouse Delayed Inserts has been increased during last 2 minutes"
+            description: |-
+              Look to Clickhouse pod log to investigate the reason of increased Clickhouse Context Lock Wait
+
+        - alert: ClickhouseFailedQueryTotal
+          expr: increase(clickhouse_failed_query_total[10m]) > {{ .Values.rules.failedQueryTotal }}
+          labels:
+            severity: warning
+          for: 60s
+          annotations:
+            summary: "Amount of Failed Query in Total of Clickhouse is high during last 10 minutes"
+            description: |-
+              Look to Clickhouse pod log to investigate the reason of high Failed Query
+
+        - alert: ClickhouseFailedSelectQueryTotal
+          expr: increase(clickhouse_failed_select_query_total[10m]) > {{ .Values.rules.failedSelectQueryTotal }}
+          labels:
+            severity: warning
+          for: 60s
+          annotations:
+            summary: "Amount of Failed Select Query of Clickhouse is high during last 10 minutes"
+            description: |-
+              Look to Clickhouse pod log to investigate the reason of high Failed Select Query
+
+{{- end }}

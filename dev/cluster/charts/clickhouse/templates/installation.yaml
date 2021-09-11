@@ -1,0 +1,65 @@
+---
+# Source: clickhouse/templates/deployment.yaml
+apiVersion: clickhouse.altinity.com/v1
+kind: ClickHouseInstallation
+metadata:
+  name: {{ include "clickhouse.fullname" . }}-{{ .Values.clusterName }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  defaults:
+    templates:
+      dataVolumeClaimTemplate: default
+      podTemplate: default
+      serviceTemplate: service-template
+
+  configuration:
+    users:
+      my_user/allow_databases/database:
+      - default
+      my_user/networks/ip:
+      - 127.0.0.1
+      - ::/0
+      my_user/password: my_pass
+      my_user/profile: default
+
+    profiles:
+      default/max_ast_elements: 100000
+      default/max_query_size: 41943040
+
+    clusters:
+      - layout:
+          replicasCount: 2
+          shardsCount: 1
+        name: my-cluster
+
+  templates:
+    podTemplates:
+      - name: default
+        spec:
+          containers:
+            - name: clickhouse
+              image: yandex/clickhouse-server:{{ .Chart.AppVersion }}
+              imagePullPolicy: Always
+
+    serviceTemplates:
+      - name: service-template
+        generateName: "clickhouse-{chi}"
+        spec:
+          ports:
+            - name: client
+              port: 9000
+              protocol: TCP
+            - name: http
+              protocol: TCP
+              port: 8123
+          type: ClusterIP
+
+    volumeClaimTemplates:
+      - name: default
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 500Mi
+

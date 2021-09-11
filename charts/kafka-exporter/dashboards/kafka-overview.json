@@ -12,7 +12,7 @@
       }
     ]
   },
-  "description": "For more informatio, please visit https://github.com/zifter/helm-charts/tree/main/charts/kafka-exporter",
+  "description": "For more information, please visit https://github.com/zifter/helm-charts/tree/main/charts/kafka-exporter",
   "editable": true,
   "gnetId": 7589,
   "graphTooltip": 0,

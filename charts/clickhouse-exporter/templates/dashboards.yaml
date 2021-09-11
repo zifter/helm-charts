@@ -1,0 +1,17 @@
+{{ if .Values.dashboards.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "clickhouse-exporter.fullname" . }}-dashboards
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- .Values.dashboards.labels | toYaml | nindent 4 }}
+    {{- include "clickhouse-exporter.labels" . | nindent 4 }}
+  annotations:
+    {{- if .Values.dashboards.targetFolder }}
+    k8s-sidecar-target-directory: "{{ .Values.dashboards.targetFolder }}"
+    {{- end }}
+data:
+  clickhouse-overview.json:
+    {{ .Files.Get "dashboards/clickhouse-overview.json" | toPrettyJson }}
+{{ end }}

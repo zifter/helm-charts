@@ -12,7 +12,7 @@
       }
     ]
   },
-  "description": "For more informatio, please visit https://github.com/zifter/helm-charts/tree/main/charts/domain-exporter",
+  "description": "For more information, please visit https://github.com/zifter/helm-charts/tree/main/charts/domain-exporter",
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
