@@ -10,6 +10,11 @@ helm repo add zifter https://github.com/zifter/helm-charts
 * [domain-exporter](charts/domain-exporter/README.md)
 * [kafka-exporter](charts/kafka-exporter/README.md)
 
+## List of usefull charts in other repository
+* [prometheus-node-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-node-exporter) -
+export metrics from node. Will be installed by default in prometheus stack. Also allows to you scrape metrics from nodes
+out of kubernetes.
+
 ## Contributing
 ### Preparation
 #### Install kind
