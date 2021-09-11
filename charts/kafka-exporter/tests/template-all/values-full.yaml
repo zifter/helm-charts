@@ -111,6 +111,8 @@ kafka:
     user: user
     # if sasl is enabled provide password
     password: pass
+    # SASL mechanism can be plain, scram-sha512, scram-sha256
+    mechanism: plain
     # list of brokers of cluster to monitor
     brokers:
       - host1:9092
