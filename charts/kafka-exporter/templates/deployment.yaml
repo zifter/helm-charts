@@ -1,34 +1,35 @@
+{{- range .Values.kafka }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "kafka-exporter.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  name: {{ include "kafka-exporter.fullname" $ }}-{{ .name  | lower | replace "_" "-" }}
+  namespace: {{ $.Release.Namespace }}
   labels:
-    {{- include "kafka-exporter.labels" . | nindent 4 }}
+    {{- include "kafka-exporter.labels" $ | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ $.Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "kafka-exporter.selectorLabels" . | nindent 6 }}
+      {{- include "kafka-exporter.selectorLabels" $ | nindent 6 }}
   template:
     metadata:
       annotations:
-      {{- with .Values.podAnnotations }}
+      {{- with $.Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "kafka-exporter.selectorLabels" . | nindent 8 }}
+        {{- include "kafka-exporter.selectorLabels" $ | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
+      {{- with $.Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "kafka-exporter.serviceAccountName" . }}
+      serviceAccountName: {{ include "kafka-exporter.serviceAccountName" $ }}
       securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+        {{- toYaml $.Values.podSecurityContext | nindent 8 }}
       containers:
-      {{- range .Values.kafka }}
-        - name: {{ $.Chart.Name }}-{{ .name  | lower | replace "_" "-" }}
+        - name: {{ $.Chart.Name }}
           securityContext:
             {{- toYaml $.Values.securityContext | nindent 12 }}
           image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
@@ -42,6 +43,8 @@ spec:
             - {{ .user }}
             - --sasl.password
             - {{ .password }}
+            - --sasl.mechanism
+            - {{ .mechanism | default "plain" }}
             {{- end }}
             {{- range required "Brokers must be set!" .brokers }}
             - --kafka.server
@@ -59,16 +62,16 @@ spec:
 #            httpGet:
 #              path: /
 #              port: http
-      {{- end }}
-      {{- with .Values.nodeSelector }}
+      {{- with $.Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.affinity }}
+      {{- with $.Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+      {{- with $.Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{- end }}

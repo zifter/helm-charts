@@ -16,3 +16,9 @@ kafka:
   - name: test-cluster
     brokers:
       - kafka.test.svc.cluster.local:9092
+  - name: test-cluster-sasl
+    user: kafka_user
+    password: kafka_pass
+    mechanism: plain
+    brokers:
+      - kafka-sasl.test.svc.cluster.local:9092

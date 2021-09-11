@@ -92,7 +92,7 @@ rules:
   # Check consumer lag
   consumerGroupLag:
     enabled: true
-    # More than threshold is alert
+    # More than threshold is not good
     threshold: 100
     # Exclude some groups from rule
     excludeGroups: []
@@ -124,6 +124,8 @@ kafka: []
 #    user: null
 #    # if sasl is enabled provide password
 #    password: null
+#    # SASL mechanism can be plain, scram-sha512, scram-sha256
+#    mechanism: null
 #    # list of brokers of cluster to monitor
 #    brokers:
 ##      - host1

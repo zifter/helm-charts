@@ -60,6 +60,14 @@ releases:
     values:
       - releases/values-kafka.yaml
 
+  - name: kafka-sasl
+    namespace: test
+    chart: bitnami/kafka
+    version: 14.1.0
+    condition: kafkaExporter.enabled
+    values:
+      - releases/values-kafka-sasl.yaml
+
 environments:
   default:
     values:

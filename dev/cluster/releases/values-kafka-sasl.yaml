@@ -1,0 +1,12 @@
+allowPlaintextListener: true
+autoCreateTopicsEnable: true
+auth:
+  clientProtocol: sasl
+  interBrokerProtocol: plaintext
+  sasl:
+    mechanisms: plain,scram-sha-256,scram-sha-512
+    jaas:
+      clientUsers:
+        - kafka_user
+      clientPasswords:
+        - kafka_pass
