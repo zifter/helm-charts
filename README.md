@@ -9,6 +9,7 @@ helm repo add zifter https://github.com/zifter/helm-charts
 ## List of charts in this repository
 * [domain-exporter](charts/domain-exporter/README.md)
 * [kafka-exporter](charts/kafka-exporter/README.md)
+* [clickhouse-exporter](charts/clickhouse-exporter/README.md)
 
 ## List of usefull charts in other repository
 * [prometheus-node-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-node-exporter) -
