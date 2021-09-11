@@ -5,6 +5,8 @@ repositories:
   url: https://prometheus-community.github.io/helm-charts
 - name: bitnami
   url: https://charts.bitnami.com/bitnami
+- name: slamdev
+  url: https://slamdev.github.io/helm-charts
 
 helmDefaults:
   wait: true
@@ -68,10 +70,40 @@ releases:
     values:
       - releases/values-kafka-sasl.yaml
 
+  # clickhouse exporter
+  - name: clickhouse-exporter
+    namespace: monitoring
+    chart: ../../charts/clickhouse-exporter
+    condition: clickhouseExporter.enabled
+    values:
+      - releases/values-clickhouse-exporter.yaml
+    needs:
+      - prometheus
+      - ingress-nginx
+
+  - name: clickhouse-operator
+    namespace: clickhouse-operator
+    chart: slamdev/altinity-clickhouse-operator
+    version: 0.0.6
+    condition: clickhouseExporter.enabled
+    values:
+      - releases/values-clickhouse-operator.yaml
+    needs:
+      - prometheus
+
+  - name: clickhouse
+    namespace: clickhouse  # clickhouse-operator will watch that namespace
+    chart: charts/clickhouse
+    condition: clickhouseExporter.enabled
+    needs:
+      - clickhouse-operator
+
 environments:
   default:
     values:
       - kafkaExporter:
           enabled: true
       - domainExporter:
+          enabled: true
+      - clickhouseExporter:
           enabled: true
