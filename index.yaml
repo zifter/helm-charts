@@ -147,6 +147,26 @@ entries:
   kafka-exporter:
   - apiVersion: v2
     appVersion: latest
+    created: "2021-09-11T16:31:10.322945049Z"
+    description: A Helm chart of kafka exporter. Provide prometheus metrics, alerts
+      and dashboard.
+    digest: 61d1bc1bfe58991444821ce6b94c28c29baeff9ce3f840f7a1fa7ae5e32b99c4
+    home: https://github.com/zifter/helm-charts
+    icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
+    maintainers:
+    - email: zifter.ai+github@gmail.com
+      name: zifter
+      url: https://github.com/zifter
+    name: kafka-exporter
+    sources:
+    - https://github.com/zifter/helm-charts/tree/main/charts/kafka-exporter
+    - https://github.com/danielqsj/kafka_exporter
+    type: application
+    urls:
+    - https://github.com/zifter/helm-charts/releases/download/kafka-exporter-0.1.1/kafka-exporter-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-09-10T21:41:08.670685837Z"
     description: A Helm chart of kafka exporter. Provide prometheus metrics, alerts
       and dashboard.
@@ -165,4 +185,4 @@ entries:
     urls:
     - https://github.com/zifter/helm-charts/releases/download/kafka-exporter-0.1.0/kafka-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-10T21:41:08.670718237Z"
+generated: "2021-09-11T16:31:10.32296595Z"
