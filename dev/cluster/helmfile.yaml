@@ -98,6 +98,24 @@ releases:
     needs:
       - clickhouse-operator
 
+  # zookeeper
+  - name: zookeeper-exporter
+    namespace: monitoring
+    chart: ../../charts/zookeeper-exporter
+    condition: zookeeperExporter.enabled
+    needs:
+      - prometheus
+      - ingress-nginx
+    values:
+      - releases/values-zookeeper-operator.yaml
+
+  - name: zookeeper
+    namespace: test
+    chart: bitnami/zookeeper
+    condition: zookeeperExporter.enabled
+    values:
+      - releases/values-zookeeper-operator.yaml
+
 environments:
   default:
     values:
@@ -106,4 +124,6 @@ environments:
       - domainExporter:
           enabled: true
       - clickhouseExporter:
+          enabled: true
+      - zookeeperExporter:
           enabled: true

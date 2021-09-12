@@ -1,14 +1,14 @@
 apiVersion: v2
-name: kafka-exporter
-description: A Helm chart of kafka exporter. Provide prometheus metrics, alerts and dashboard.
+name: zookeeper-exporter
+description: A Helm chart of zookeeper exporter. Provide prometheus metrics, alerts and dashboard.
 type: application
-version: 0.1.3
+version: 0.1.0
 appVersion: "latest"
 icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
 home: https://github.com/zifter/helm-charts
 sources:
-  - https://github.com/zifter/helm-charts/tree/main/charts/kafka-exporter
-  - https://github.com/danielqsj/kafka_exporter
+  - https://github.com/zifter/helm-charts/tree/main/charts/zookeeper-exporter
+  - https://github.com/dabealu/zookeeper-exporter
 maintainers:
   - name: zifter
     email: zifter.ai+github@gmail.com
