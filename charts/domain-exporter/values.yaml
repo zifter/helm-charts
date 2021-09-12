@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: zifter/domain_exporter
+  repository: caarlos0/domain_exporter
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
