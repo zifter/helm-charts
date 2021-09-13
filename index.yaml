@@ -3,6 +3,24 @@ entries:
   agones-dashboards:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-09-13T16:41:32.494692134Z"
+    description: A Helm chart of agones dashboards. Provide grafana dashboards.
+    digest: 51dfc6e01d7ee44f918efa8059d0a879a093e0243aa007e2db46a2f3ae4ba518
+    home: https://github.com/googleforgames/agones
+    icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
+    maintainers:
+    - email: zifter.ai+github@gmail.com
+      name: zifter
+      url: https://github.com/zifter
+    name: agones-dashboards
+    sources:
+    - https://github.com/googleforgames/agones
+    type: application
+    urls:
+    - https://github.com/zifter/helm-charts/releases/download/agones-dashboards-1.16.1/agones-dashboards-1.16.1.tgz
+    version: 1.16.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-09-13T11:52:16.193341576Z"
     description: A Helm chart of agones dashboards. Provide grafana dashboards.
     digest: 4555e518647193ff0f823c9f31d7f1e205f4b9fcad1500365d1fde779bbaf9ef
@@ -366,4 +384,4 @@ entries:
     urls:
     - https://github.com/zifter/helm-charts/releases/download/zookeeper-exporter-0.1.0/zookeeper-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-13T11:52:16.325245138Z"
+generated: "2021-09-13T16:41:32.494760438Z"
