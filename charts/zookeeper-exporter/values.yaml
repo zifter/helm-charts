@@ -1,11 +1,11 @@
-# Default values for domain-exporter.
+# Default values for zookeeper-exporter.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: caarlos0/domain_exporter
+  repository: dabealu/zookeeper-exporter
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -81,22 +81,24 @@ affinity: {}
 # Prometheus rules
 rules:
   enabled: true
-  # Alert with warning severity if metrics is absent
-  absent:
-    enabled: true
-  # Alert with warning severity if expiration time is less then provided
-  warning:
-    enabled: true
-    expiration: 60  # days
-  # Alert with critical severity alert if expiration time is less then provided
-  critical:
-    enabled: true
-    expiration: 5  # days
-  # Alert on failure to detect expiration time
-  failed:
-    enabled: true
+  restartRecently: 180000
+  avgLatency: 20
+  outstandingRequests: 10
+  highFileDescriptors: 1
+  pendingSyncs: 10
+  pendingSessions: 10
+  throttleRequests: 0
+  outstandingTLSHandshakes: 0
+  connectionRejected: 0
+  highEphemeralNodes: 1000
+  unrecoverableErrors: 0
+  lowGetChildrenCacheHitRate: 0.3
+  ensembleAuthFailures: 0
+  largeRequestsRejected: 0
+  staleRequestsDropped: 0
 
-# Grafana dashboard with representation of monitoring domains
+
+# Grafana dashboards
 dashboards:
   enabled: true
   # Labels to add dashboard
@@ -115,6 +117,9 @@ metrics:
   # Interval between metrics scraping
   interval: 1m
 
-# List of domains to monitor
-domains:
-  - google.com
+# Zookeeper host to export metrics
+zookeeper: []
+# - name: cluster
+#   hosts:
+#   - host1:2181
+#   - host2:2181

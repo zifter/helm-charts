@@ -5,23 +5,6 @@
         "affinity": {
             "type": "object"
         },
-        "cliclhouse": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "hosts": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "name": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
         "dashboards": {
             "type": "object",
             "properties": {
@@ -186,44 +169,8 @@
         "rules": {
             "type": "object",
             "properties": {
-                "consumerGroupLag": {
-                    "type": "object",
-                    "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "excludeGroups": {
-                            "type": "array"
-                        },
-                        "threshold": {
-                            "type": "integer"
-                        }
-                    }
-                },
                 "enabled": {
                     "type": "boolean"
-                },
-                "minPartitions": {
-                    "type": "object",
-                    "properties": {
-                        "count": {
-                            "type": "integer"
-                        },
-                        "enabled": {
-                            "type": "boolean"
-                        }
-                    }
-                },
-                "minReplicas": {
-                    "type": "object",
-                    "properties": {
-                        "count": {
-                            "type": "integer"
-                        },
-                        "enabled": {
-                            "type": "boolean"
-                        }
-                    }
                 }
             }
         },
@@ -279,6 +226,23 @@
         },
         "tolerations": {
             "type": "array"
+        },
+        "zookeeper": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "brokers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            }
         }
     }
 }

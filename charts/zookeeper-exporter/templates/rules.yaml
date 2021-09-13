@@ -1,0 +1,192 @@
+{{ if .Values.rules.enabled }}
+kind: PrometheusRule
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: {{ include "zookeeper-exporter.fullname" . }}-rules
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "zookeeper-exporter.labels" . | nindent 4 }}
+spec:
+  groups:
+    - name: Zookeeper
+      rules:
+        - alert: ZookeeperDown
+          expr: zk_up == 0
+          for: 60s
+          labels:
+            severity: critical
+          annotations:
+            summary: "zookeeper is possible down"
+            description: |-
+              Zookeeper can not be scraped via prometheus
+
+        - alert: ZookeeperRestartRecently
+          expr: zk_uptime > 1 < {{ .Values.rules.restartRecently }}
+          for: 60s
+          annotations:
+            summary: "Amount of time it takes for the server to respond to a client request (since the server was started)."
+            description: |-
+              Look to previous Zookeeper pod log to investigate restart reason
+
+        - alert: ZookeeperAvgLatency
+          expr: zk_avg_latency > {{ .Values.rules.avgLatency }}
+          for: 60s
+          labels:
+            severity: high
+          annotations:
+            summary: "Avarage amount of time it takes for the server to respond to a client request."
+            description: |-
+              Look to CPU and Memory as well as node or pod utilization
+              Look to Zookeeper Disk free space
+              Look to zookeeper read and write
+
+        - alert: ZookeeperOutstandingRequests
+          expr: zk_outstanding_requests > {{ .Values.rules.outstandingRequests }}
+          for: 60s
+          labels:
+            severity: critical
+          annotations:
+            summary: "Zookeeper receives more requests than it can process."
+            description: |-
+              Look to CPU and Memory as well as node or pod utilization
+              Look to Zookeeper Disk free space
+              Look to zookeeper read and write
+
+        - alert: ZookeeperHighFileDescriptors
+          expr: (zk_open_file_descriptor_count / zk_max_file_descriptor_count) > {{ .Values.rules.highFileDescriptors }}
+          for: 60s
+          labels:
+            severity: high
+          annotations:
+            summary: "Number of file descriptors used over the limit."
+            description: |-
+              Look to ZookeeperHighFileDescriptors
+
+        - alert: ZookeeperPendingSyncs
+          expr: zk_pending_syncs > {{ .Values.rules.pendingSyncs }}
+          for: 60s
+          labels:
+            severity: high
+          annotations:
+            summary: "Possible Zookeeper master pending syncs with followers."
+            description: |-
+              Look to ZookeeperPendingSyncs
+
+        - alert: ZookeeperPendingSessions
+          expr: zk_avg_pending_session_queue_size > {{ .Values.rules.pendingSessions }}
+          for: 60s
+          labels:
+            severity: high
+          annotations:
+            summary: "Possible Zookeeper pending sessions."
+            description: |-
+              Look to ZookeeperPendingSyncs ZookeeperPendingSessions
+
+        - alert: ZookeeperThrottleRequests
+          expr: increase(zk_request_throttle_wait_count[1m]) > {{ .Values.rules.throttleRequests }}
+          labels:
+            severity: warning
+          annotations:
+            summary: "Zookeeper throttle requests"
+            description: |-
+              Look to requestThrottleLimit and requestThrottleStallTime
+
+        - alert: ZookeeperOutstandingTLSHandshakes
+          expr: zk_outstanding_tls_handshake > {{ .Values.rules.outstandingTLSHandshakes }}
+          for: 60s
+          labels:
+            severity: warning
+          annotations:
+            summary: "Zookeeper receives more TLS handshake than it can process."
+            description: |-
+              Look to ZookeeperOutstandingTLSHandshakes
+
+        - alert: ZookeeperConnectionRejected
+          expr: increase(zk_connection_rejected[1m]) > {{ .Values.rules.connectionRejected }}
+          labels:
+            severity: warning
+          annotations:
+            summary: "Zookeeper reject connection."
+            description: |-
+              Check connections count on Zookeeper
+
+        - alert: ZookeeperHighEphemeralNodes
+          expr: zk_ephemerals_count > {{ .Values.rules.highEphemeralNodes }}
+          for: 60s
+          labels:
+            severity: warning
+          annotations:
+            summary: "Zookeeper have too high ephemeral znodes count."
+            description: |-
+              Look to ZookeeperHighEphemeralNodes
+
+        - alert: ZookeeperUnrecoverableErrors
+          expr: increase(zk_unrecoverable_error_count[1m]) > {{ .Values.rules.unrecoverableErrors }}
+          for: 60s
+          labels:
+            severity: critical
+          annotations:
+            summary: "Zookeeper have unhandled Exception"
+            description: |-
+              It mean Zookeeper catch some unknown Exception and will close listen socket
+              Look to current and previous Zookeeper pod log to investigate restart reason
+
+        - alert: ZookeeperLowGetChildrenCacheHitRate
+          expr: increase(zk_response_packet_cache_hits[1m]) / (increase(zk_response_packet_cache_misses[1m]) + increase(zk_response_packet_cache_hits[1m]) ) < {{ .Values.rules.lowGetChildrenCacheHitRate }}
+          labels:
+            severity: warning
+          annotations:
+            summary: "Zookeeper have inefficient get data znodes response cache."
+            description: |-
+              For heavy read workloads Zookeeper try to cache response for get data API method for save the serialization cost on popular znodes
+              Try to tune parameter maxResponseCacheSize
+
+        - alert: ZookeeperEnsembleAuthFailures
+          expr: increase(zk_ensemble_auth_fail[1m]) > {{ .Values.rules.ensembleAuthFailures }}
+          labels:
+            severity: warning
+          annotations:
+            summary: "Zookeeper authentication failures with ensemble scheme."
+            description: |-
+              Look to ensembleAuthName
+
+        - alert: ZookeeperLargeRequestsRejected
+          expr: increase(zk_large_requests_rejected[1m]) > {{ .Values.rules.largeRequestsRejected }}
+          labels:
+            severity: high
+          annotations:
+            summary: "Zookeeper reject some large requests."
+            description: |-
+              It mean Zookeeper avoid JVM allocate too much memory and runs out of usable heap and ultimately crashes.
+              Look to largeRequestMaxBytes and largeRequestThreshold options
+
+        - alert: ZookeeperStaleRequestsDropped
+          expr: increase(zk_stale_requests_dropped[1m]) > {{ .Values.rules.staleRequestsDropped }}
+          labels:
+            severity: high
+          annotations:
+            summary: "Zookeeper dropped stale requests."
+            description: |-
+              Stale request is a request sent by a connection that is now closed or a request that will have a request latency higher than the sessionTimeout
+              Look to requestThrottleDropStale and requestStaleLatencyCheck and requestStaleConnectionCheck options
+
+        - alert: ZookeeperDigestMismatch
+          expr: increase(zk_digest_mismatches_count[1m]) > 0
+          labels:
+            severity: critical
+          annotations:
+            summary: "Zookeeper have inconsistent data in memory."
+            description: |-
+              The digest feature is added to detect the data inconsistency inside ZooKeeper when loading database from disk catching up and following leader its doing incrementally hash check for the DataTree based on the adHash
+              Look to digest.enabled options
+
+        - alert: ZookeeperSessionlessConnectionsExpired
+          expr: increase(zk_sessionless_connections_expired[1m]) > 0
+          labels:
+            severity: warning
+          annotations:
+            summary: "Zookeeper close connection without session."
+            description: |-
+              Look to minSessionTimeout maxSessionTimeout options
+
+{{- end }}

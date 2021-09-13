@@ -10,6 +10,7 @@ helm repo add zifter https://github.com/zifter/helm-charts
 * [domain-exporter](charts/domain-exporter/README.md)
 * [kafka-exporter](charts/kafka-exporter/README.md)
 * [clickhouse-exporter](charts/clickhouse-exporter/README.md)
+* [zookeeper-exporter](charts/zookeeper-exporter/README.md)
 
 ## List of usefull charts in other repository
 * [prometheus-node-exporter](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-node-exporter) -
@@ -58,6 +59,12 @@ helm plugin install https://github.com/karuppiah7890/helm-schema-gen.git
 ```bash
 ./dev/cluster/run.sh
 ```
+
+### New Helm Chart Guide
+* New chart in charts folder
+* Add charts/*/tests/values-full,yaml
+* Add to Dev Cluster installing this chart
+* Add to README.md
 
 ### Testing helm charts
 Install [ct](https://github.com/helm/chart-testing/releases)
