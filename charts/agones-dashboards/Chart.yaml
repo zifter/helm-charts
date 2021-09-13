@@ -3,7 +3,7 @@ name: agones-dashboards
 description: A Helm chart of agones dashboards. Provide grafana dashboards.
 type: application
 version: 1.16.0
-appVersion: "1.16.0"
+appVersion: "1.16.1"
 icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
 home: https://github.com/googleforgames/agones
 sources:

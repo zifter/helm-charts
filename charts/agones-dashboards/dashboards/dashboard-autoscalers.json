@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1591350935123,
+  "iteration": 1631545202201,
   "links": [],
   "panels": [
     {
@@ -29,6 +29,10 @@
         "#d44a3a"
       ],
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "percentunit",
       "gauge": {
         "maxValue": 1,
@@ -81,12 +85,10 @@
       "targets": [
         {
           "$$hashKey": "object:10515",
-          "expr": "(label_replace(agones_fleets_replicas_count{type=\"allocated\", namespace=\"$namespace\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\", namespace=\"$namespace\"}))\n\n/ on(name)\n\n(label_replace(agones_fleets_replicas_count{type=\"desired\", namespace=\"$namespace\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\",namespace=\"$namespace\"}))",
+          "expr": "(label_replace(agones_fleets_replicas_count{type=\"allocated\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\"}))\n\n/ on(name)\n\n(label_replace(agones_fleets_replicas_count{type=\"desired\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\"}))",
           "format": "time_series",
           "instant": false,
-          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -113,6 +115,10 @@
         "#299c46"
       ],
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "percentunit",
       "gauge": {
         "maxValue": 1,
@@ -167,12 +173,10 @@
       "targets": [
         {
           "$$hashKey": "object:10343",
-          "expr": "(label_replace(agones_fleets_replicas_count{type=\"ready\", namespace=\"$namespace\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\", namespace=\"$namespace\"}))\n\n/ on(name)\n\n(label_replace(agones_fleets_replicas_count{type=\"desired\", namespace=\"$namespace\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\", namespace=\"$namespace\"}))",
+          "expr": "(label_replace(agones_fleets_replicas_count{type=\"ready\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\"}))\n\n/ on(name)\n\n(label_replace(agones_fleets_replicas_count{type=\"desired\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\"}))",
           "format": "time_series",
           "instant": false,
-          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -200,6 +204,10 @@
         "#d44a3a"
       ],
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "short",
       "gauge": {
         "maxValue": 100,
@@ -251,12 +259,10 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(agones_fleet_autoscalers_desired_replicas_count{name=\"$name\", namespace=\"$namespace\"} - agones_fleet_autoscalers_current_replicas_count{name=\"$name\", namespace=\"$namespace\"})",
+          "expr": "(agones_fleet_autoscalers_desired_replicas_count{name=\"$name\"} - agones_fleet_autoscalers_current_replicas_count{name=\"$name\"})",
           "format": "time_series",
           "instant": true,
-          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -283,6 +289,10 @@
         "#d44a3a"
       ],
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "short",
       "gauge": {
         "maxValue": 100,
@@ -334,12 +344,10 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "agones_fleet_autoscalers_desired_replicas_count{name=\"$name\", namespace=\"$namespace\"}",
+          "expr": "agones_fleet_autoscalers_desired_replicas_count{name=\"$name\"}",
           "format": "time_series",
           "instant": true,
-          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -366,6 +374,10 @@
         "#d44a3a"
       ],
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "short",
       "gauge": {
         "maxValue": 100,
@@ -417,12 +429,10 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "agones_fleet_autoscalers_buffer_size{name=\"$name\",type=\"count\", namespace=\"$namespace\"}",
+          "expr": "agones_fleet_autoscalers_buffer_size{name=\"$name\",type=\"count\"}",
           "format": "time_series",
           "instant": true,
-          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -449,6 +459,10 @@
         "#d44a3a"
       ],
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "short",
       "gauge": {
         "maxValue": 100,
@@ -500,12 +514,10 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "agones_fleet_autoscalers_buffer_limits{name=\"$name\",type=\"min\", namespace=\"$namespace\"}",
+          "expr": "agones_fleet_autoscalers_buffer_limits{name=\"$name\",type=\"min\"}",
           "format": "time_series",
           "instant": true,
-          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -532,6 +544,10 @@
         "#d44a3a"
       ],
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "percentunit",
       "gauge": {
         "maxValue": 100,
@@ -583,12 +599,10 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(agones_fleet_autoscalers_desired_replicas_count{name=\"$name\", namespace=\"$namespace\"} - agones_fleet_autoscalers_current_replicas_count{name=\"$name\", namespace=\"$namespace\"})\n\n  / \n\nagones_fleet_autoscalers_current_replicas_count{name=\"$name\", namespace=\"$namespace\"} ",
+          "expr": "(agones_fleet_autoscalers_desired_replicas_count{name=\"$name\"} - agones_fleet_autoscalers_current_replicas_count{name=\"$name\"})\n\n  / \n\nagones_fleet_autoscalers_current_replicas_count{name=\"$name\"} ",
           "format": "time_series",
           "instant": true,
-          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -615,6 +629,10 @@
         "#d44a3a"
       ],
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "short",
       "gauge": {
         "maxValue": 100,
@@ -666,12 +684,10 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "agones_fleet_autoscalers_current_replicas_count{name=\"$name\", namespace=\"$namespace\"}",
+          "expr": "agones_fleet_autoscalers_current_replicas_count{name=\"$name\"}",
           "format": "time_series",
           "instant": true,
-          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -698,6 +714,10 @@
         "#299c46"
       ],
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "percent",
       "gauge": {
         "maxValue": 100,
@@ -749,12 +769,10 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "agones_fleet_autoscalers_buffer_size{name=\"$name\",type=\"percentage\", namespace=\"$namespace\"}",
+          "expr": "agones_fleet_autoscalers_buffer_size{name=\"$name\",type=\"percentage\"}",
           "format": "time_series",
           "instant": true,
-          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -781,6 +799,10 @@
         "#d44a3a"
       ],
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "short",
       "gauge": {
         "maxValue": 100,
@@ -832,12 +854,10 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "agones_fleet_autoscalers_buffer_limits{name=\"$name\",type=\"max\", namespace=\"$namespace\"}",
+          "expr": "agones_fleet_autoscalers_buffer_limits{name=\"$name\",type=\"max\"}",
           "format": "time_series",
           "instant": true,
-          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -860,6 +880,10 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -886,9 +910,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -898,50 +923,44 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "agones_fleet_autoscalers_current_replicas_count{name=\"$name\", namespace=\"$namespace\"}",
+          "expr": "agones_fleet_autoscalers_current_replicas_count{name=\"$name\"}",
           "format": "time_series",
           "instant": false,
-          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "fas current replicas",
           "refId": "A"
         },
         {
-          "expr": "agones_fleet_autoscalers_desired_replicas_count{name=\"$name\", namespace=\"$namespace\"}",
+          "expr": "agones_fleet_autoscalers_desired_replicas_count{name=\"$name\"}",
           "format": "time_series",
-          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "fas desired replicate",
           "refId": "B"
         },
         {
-          "expr": "label_replace(agones_fleets_replicas_count{type=\"allocated\", namespace=\"$namespace\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\", namespace=\"$namespace\"})",
+          "expr": "label_replace(agones_fleets_replicas_count{type=\"allocated\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\"})",
           "format": "time_series",
-          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "fleet allocated",
           "refId": "C"
         },
         {
-          "expr": "label_replace(agones_fleets_replicas_count{type=\"ready\", namespace=\"$namespace\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\", namespace=\"$namespace\"})",
+          "expr": "label_replace(agones_fleets_replicas_count{type=\"ready\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\"})",
           "format": "time_series",
-          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "fleet ready",
           "refId": "D"
         },
         {
-          "expr": "label_replace(agones_fleets_replicas_count{type=\"desired\", namespace=\"$namespace\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\", namespace=\"$namespace\"})",
+          "expr": "label_replace(agones_fleets_replicas_count{type=\"desired\"},\"fleet_name\",\"$1\",\"name\",\"(.*)\")  * on (fleet_name) group_left()  (agones_fleet_autoscalers_able_to_scale{name=\"$name\"})",
           "format": "time_series",
-          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "fleet desired",
           "refId": "E"
         },
         {
-          "expr": "(agones_fleet_autoscalers_desired_replicas_count{name=\"$name\", namespace=\"$namespace\"} - agones_fleet_autoscalers_current_replicas_count{name=\"$name\", namespace=\"$namespace\"})",
+          "expr": "(agones_fleet_autoscalers_desired_replicas_count{name=\"$name\"} - agones_fleet_autoscalers_current_replicas_count{name=\"$name\"})",
           "format": "time_series",
-          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "desired scaling",
           "refId": "F"
@@ -998,6 +1017,10 @@
         "#d44a3a"
       ],
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -1049,12 +1072,10 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "agones_fleet_autoscalers_limited{name=\"$name\", namespace=\"$namespace\"}",
+          "expr": "agones_fleet_autoscalers_limited{name=\"$name\"}",
           "format": "time_series",
           "instant": true,
-          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -1086,6 +1107,10 @@
         "#d44a3a"
       ],
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -1137,12 +1162,10 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "agones_fleet_autoscalers_able_to_scale{name=\"$name\", namespace=\"$namespace\"}",
+          "expr": "agones_fleet_autoscalers_able_to_scale{name=\"$name\"}",
           "format": "time_series",
           "instant": true,
-          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -1166,7 +1189,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 22,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [
     "agones",
@@ -1175,47 +1198,48 @@
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
-          "text": "simple-udp-autoscaler",
-          "value": "simple-udp-autoscaler"
+          "selected": true,
+          "text": "default",
+          "value": "default"
         },
-        "datasource": "Prometheus",
-        "definition": "",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": false,
-        "index": -1,
         "label": null,
         "multi": false,
-        "name": "name",
+        "name": "Prometheus",
         "options": [],
-        "query": "label_values(agones_fleet_autoscalers_desired_replicas_count,name)",
-        "refresh": 2,
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
+        "type": "datasource"
       },
       {
         "allValue": null,
         "current": {
-          "text": "default",
-          "value": "default"
+          "isNone": true,
+          "selected": false,
+          "text": "None",
+          "value": ""
         },
-        "datasource": "Prometheus",
-        "definition": "label_values(namespace)",
+        "datasource": "${Prometheus}",
+        "definition": "label_values(agones_fleet_autoscalers_desired_replicas_count,name)",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": false,
-        "index": -1,
         "label": null,
         "multi": false,
-        "name": "namespace",
+        "name": "name",
         "options": [],
-        "query": "label_values(namespace)",
+        "query": {
+          "query": "",
+          "refId": "Prometheus-name-Variable-Query"
+        },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -1260,8 +1284,5 @@
   "timezone": "",
   "title": "Agones Autoscalers",
   "uid": "zPJCl08iz",
-  "variables": {
-    "list": []
-  },
-  "version": 1
+  "version": 24
 }

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: agones-service-monitor
+description: A Helm chart for agones system
+type: application
+version: 1.16.0
+appVersion: 1.16.0

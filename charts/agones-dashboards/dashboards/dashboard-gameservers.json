@@ -17,21 +17,14 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1604523181564,
+  "iteration": 1631544849696,
   "links": [],
   "panels": [
     {
-      "aliasColors": {},
-      "breakPoint": "50%",
       "cacheTimeout": null,
-      "combine": {
-        "label": "Others",
-        "threshold": 0
-      },
-      "datasource": null,
+      "datasource": "${Prometheus}",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "displayName": "",
           "mappings": [
             {
@@ -61,8 +54,6 @@
         },
         "overrides": []
       },
-      "fontSize": "80%",
-      "format": "short",
       "gridPos": {
         "h": 6,
         "w": 7,
@@ -70,44 +61,42 @@
         "y": 0
       },
       "id": 4,
-      "interval": null,
-      "legend": {
-        "show": true,
-        "values": true
-      },
-      "legendType": "Under graph",
       "links": [],
-      "nullPointMode": "connected",
-      "pieType": "pie",
-      "pluginVersion": "7.2.1",
-      "strokeWidth": 1,
+      "options": {
+        "displayMode": "lcd",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "7.5.5",
       "targets": [
         {
-          "expr": "sum(agones_gameservers_count{fleet_name=~\"$fleet\", namespace=~\"$namespace\"}) by (type)",
+          "expr": "sum(agones_gameservers_count{fleet_name=~\"$fleet\"}) by (type)",
           "format": "time_series",
-          "hide": false,
           "instant": true,
-          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{type}}",
           "refId": "A"
         }
       ],
-      "timeFrom": null,
-      "timeShift": null,
       "title": "GameServers count per type",
-      "type": "grafana-piechart-panel",
-      "valueName": "current"
+      "type": "bargauge"
     },
     {
       "aliasColors": {},
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${Prometheus}",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -143,7 +132,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -153,9 +142,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(agones_gameservers_total{fleet_name=~\"$fleet\", namespace=~\"$namespace\"}[$interval])) by (type)",
+          "expr": "sum(rate(agones_gameservers_total{fleet_name=~\"$fleet\"}[$interval])) by (type)",
           "format": "time_series",
-          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{type}}",
           "refId": "A"
@@ -207,10 +195,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${Prometheus}",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -246,7 +233,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -256,9 +243,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(agones_gameservers_count{fleet_name=~\"$fleet\", namespace=~\"$namespace\"}) by (type)",
+          "expr": "sum(agones_gameservers_count{fleet_name=~\"$fleet\"}) by (type)",
           "format": "time_series",
-          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{type}}",
           "refId": "A"
@@ -315,10 +301,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${Prometheus}",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -352,7 +337,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -362,9 +347,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(agones_fleets_replicas_count{name=~\"$fleet\", namespace=~\"$namespace\"}) by (type)",
+          "expr": "sum(agones_fleets_replicas_count{name=~\"$fleet\"}) by (type)",
           "format": "time_series",
-          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "{{type}}",
           "refId": "A"
@@ -416,10 +400,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${Prometheus}",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -453,7 +436,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -500,7 +483,6 @@
         {
           "expr": "avg(delta(agones_gameservers_node_count_sum[1m]) / delta(agones_gameservers_node_count_count[1m]))",
           "format": "time_series",
-          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "avg",
           "refId": "D"
@@ -526,7 +508,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:696",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -535,7 +516,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:697",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -554,10 +534,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${Prometheus}",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
           "links": []
         },
         "overrides": []
@@ -591,7 +570,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.1",
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -658,7 +637,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 26,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [
     "agones",
@@ -667,6 +646,27 @@
   ],
   "templating": {
     "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "default",
+          "value": "default"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "Prometheus",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
       {
         "allValue": ".*",
         "current": {
@@ -678,15 +678,20 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${Prometheus}",
         "definition": "label_values(agones_gameservers_count, fleet_name)\t",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "fleet",
         "options": [],
-        "query": "label_values(agones_gameservers_count, fleet_name)\t",
+        "query": {
+          "query": "label_values(agones_gameservers_count, fleet_name)\t",
+          "refId": "Prometheus-fleet-Variable-Query"
+        },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -706,6 +711,8 @@
           "text": "auto",
           "value": "$__auto_interval_interval"
         },
+        "description": null,
+        "error": null,
         "hide": 0,
         "label": null,
         "name": "interval",
@@ -770,36 +777,6 @@
         "refresh": 2,
         "skipUrlSync": false,
         "type": "interval"
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(agones_gameservers_count, namespace)",
-        "hide": 0,
-        "includeAll": true,
-        "label": null,
-        "multi": true,
-        "name": "namespace",
-        "options": [],
-        "query": "label_values(agones_gameservers_count, namespace)",
-        "refresh": 2,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
       }
     ]
   },
@@ -835,5 +812,5 @@
   "timezone": "",
   "title": "Agones GameServers",
   "uid": "D78OotUmk",
-  "version": 1
+  "version": 827
 }
