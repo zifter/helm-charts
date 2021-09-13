@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 7,
+  "iteration": 1631539003212,
   "links": [],
   "panels": [
     {
@@ -27,7 +27,11 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
-      "datasource": null,
+      "datasource": "${Prometheus}",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -108,14 +112,20 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${Prometheus}",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 10,
         "x": 4,
         "y": 0
       },
+      "hiddenSeries": false,
       "id": 8,
       "legend": {
         "alignAsTable": true,
@@ -133,7 +143,11 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -161,6 +175,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Cache items rate",
       "tooltip": {
@@ -206,14 +221,20 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${Prometheus}",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 10,
         "x": 14,
         "y": 0
       },
+      "hiddenSeries": false,
       "id": 9,
       "legend": {
         "alignAsTable": true,
@@ -231,7 +252,11 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -266,6 +291,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Cache avg items per operations",
       "tooltip": {
@@ -311,14 +337,20 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${Prometheus}",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 14,
         "x": 0,
         "y": 9
       },
+      "hiddenSeries": false,
       "id": 6,
       "legend": {
         "avg": false,
@@ -333,7 +365,11 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -361,6 +397,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Avg List/Watch requests duration",
       "tooltip": {
@@ -406,14 +443,20 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${Prometheus}",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 10,
         "x": 14,
         "y": 9
       },
+      "hiddenSeries": false,
       "id": 2,
       "legend": {
         "alignAsTable": true,
@@ -430,7 +473,11 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -463,6 +510,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Caches operations rate",
       "tooltip": {
@@ -503,7 +551,7 @@
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 16,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [
     "controller",
@@ -511,7 +559,29 @@
     "client-go"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "default",
+          "value": "default"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "Prometheus",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      }
+    ]
   },
   "time": {
     "from": "now-30m",
@@ -545,5 +615,5 @@
   "timezone": "",
   "title": "Agones Controller go-client caches",
   "uid": "IcQY6i_iz",
-  "version": 6
+  "version": 249
 }

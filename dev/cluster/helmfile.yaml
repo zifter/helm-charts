@@ -7,6 +7,8 @@ repositories:
   url: https://charts.bitnami.com/bitnami
 - name: slamdev
   url: https://slamdev.github.io/helm-charts
+- name: agones
+  url: https://agones.dev/chart/stable
 
 helmDefaults:
   wait: true
@@ -120,6 +122,21 @@ releases:
   - name: agones-dashboards
     namespace: monitoring
     chart: ../../charts/agones-dashboards
+    condition: agonesDashboards.enabled
+    needs:
+      - prometheus
+
+  - name: agones
+    namespace: agones
+    chart: agones/agones
+    version: 1.16.0
+    condition: agonesDashboards.enabled
+    needs:
+      - prometheus
+
+  - name: agones-service-monitor
+    namespace: agones
+    chart: charts/agones-service-monitor
     condition: agonesDashboards.enabled
     needs:
       - prometheus

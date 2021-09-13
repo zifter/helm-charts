@@ -16,7 +16,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1564432641328,
+  "iteration": 1631539379451,
   "links": [],
   "panels": [
     {
@@ -30,6 +30,11 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": "${Prometheus}",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "s",
       "gauge": {
         "maxValue": 100,
@@ -62,7 +67,6 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
-      "options": {},
       "postfix": "",
       "postfixFontSize": "50%",
       "prefix": "",
@@ -114,6 +118,11 @@
         "rgba(237, 129, 40, 0.89)",
         "#d44a3a"
       ],
+      "datasource": "${Prometheus}",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "format": "reqps",
       "gauge": {
         "maxValue": 100,
@@ -145,7 +154,6 @@
       "maxDataPoints": 100,
       "nullPointMode": "connected",
       "nullText": null,
-      "options": {},
       "pluginVersion": "6.2.4",
       "postfix": "",
       "postfixFontSize": "50%",
@@ -196,13 +204,20 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "${Prometheus}",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 4,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
         "y": 0
       },
+      "hiddenSeries": false,
       "id": 12,
       "legend": {
         "alignAsTable": true,
@@ -219,8 +234,11 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -297,14 +315,21 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "${Prometheus}",
       "description": "",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 0,
         "y": 8
       },
+      "hiddenSeries": false,
       "id": 8,
       "legend": {
         "alignAsTable": true,
@@ -323,8 +348,11 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -401,13 +429,20 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "${Prometheus}",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 12,
         "y": 8
       },
+      "hiddenSeries": false,
       "id": 10,
       "legend": {
         "alignAsTable": true,
@@ -426,8 +461,11 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -491,13 +529,20 @@
       "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "${Prometheus}",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 2,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 24,
         "x": 0,
         "y": 17
       },
+      "hiddenSeries": false,
       "id": 18,
       "legend": {
         "alignAsTable": true,
@@ -514,8 +559,11 @@
       "linewidth": 2,
       "links": [],
       "nullPointMode": "null",
-      "options": {},
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -575,7 +623,7 @@
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 18,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [
     "agones",
@@ -588,22 +636,51 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "default",
+          "value": "default"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "Prometheus",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": ".*",
         "current": {
-          "text": "All",
+          "selected": true,
+          "text": [
+            "All"
+          ],
           "value": [
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${Prometheus}",
         "definition": "label_values(agones_gameservers_count, fleet_name)",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "fleet",
         "options": [],
-        "query": "label_values(agones_gameservers_count, fleet_name)",
+        "query": {
+          "query": "label_values(agones_gameservers_count, fleet_name)",
+          "refId": "StandardVariableQuery"
+        },
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -619,9 +696,12 @@
         "auto_count": 30,
         "auto_min": "10s",
         "current": {
+          "selected": false,
           "text": "1m",
           "value": "1m"
         },
+        "description": null,
+        "error": null,
         "hide": 0,
         "label": null,
         "name": "interval",
@@ -716,5 +796,5 @@
   "timezone": "",
   "title": "Agones  Allocations",
   "uid": "TfUv6ylmk",
-  "version": 1
+  "version": 289
 }

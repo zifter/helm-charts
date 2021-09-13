@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1551904655558,
+  "iteration": 1631540577772,
   "links": [],
   "panels": [
     {
@@ -23,15 +23,21 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${Prometheus}",
       "description": "API Server Main Resource Request count for Fleet/Gameserver/Gameserverset",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
         "y": 0
       },
+      "hiddenSeries": false,
       "id": 2,
       "legend": {
         "alignAsTable": true,
@@ -50,12 +56,17 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -114,15 +125,21 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${Prometheus}",
       "description": "API Server Subresource Request count for Fleet/Gameserver/Gameserverset",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
         "y": 0
       },
+      "hiddenSeries": false,
       "id": 10,
       "legend": {
         "alignAsTable": true,
@@ -141,12 +158,17 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -206,13 +228,20 @@
       "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "${Prometheus}",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
         "y": 8
       },
+      "hiddenSeries": false,
       "id": 6,
       "legend": {
         "alignAsTable": true,
@@ -231,18 +260,23 @@
       "linewidth": 1,
       "links": [
         {
-          "type": "dashboard"
+          "url": "/"
         }
       ],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -301,14 +335,21 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "${Prometheus}",
       "description": "409 error on Update of Resources",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
         "y": 8
       },
+      "hiddenSeries": false,
       "id": 8,
       "legend": {
         "alignAsTable": true,
@@ -327,12 +368,17 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -390,13 +436,20 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "${Prometheus}",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
         "y": 16
       },
+      "hiddenSeries": false,
       "id": 4,
       "legend": {
         "alignAsTable": true,
@@ -415,12 +468,17 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -479,14 +537,21 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "${Prometheus}",
       "description": "Request Latency, 90% quantile with verb selector",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
         "y": 16
       },
+      "hiddenSeries": false,
       "id": 12,
       "legend": {
         "alignAsTable": true,
@@ -505,12 +570,17 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -569,14 +639,21 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
+      "datasource": "${Prometheus}",
       "description": "Request Latency, 99% quantile with verb selector",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 0,
         "y": 24
       },
+      "hiddenSeries": false,
       "id": 16,
       "legend": {
         "alignAsTable": true,
@@ -595,12 +672,17 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "paceLength": 10,
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
       "seriesOverrides": [],
+      "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
@@ -656,7 +738,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 18,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [
     "agones",
@@ -666,14 +748,40 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": true,
+          "text": "default",
+          "value": "default"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "Prometheus",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": null,
         "current": {
+          "selected": true,
           "tags": [],
-          "text": "All",
+          "text": [
+            "gameservers"
+          ],
           "value": [
-            "$__all"
+            "gameservers"
           ]
         },
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "CRD",
@@ -681,7 +789,7 @@
         "name": "CustomResourceDefinition",
         "options": [
           {
-            "selected": true,
+            "selected": false,
             "text": "All",
             "value": "$__all"
           },
@@ -696,7 +804,7 @@
             "value": "fleets"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "gameservers",
             "value": "gameservers"
           },
@@ -712,16 +820,19 @@
           }
         ],
         "query": "fleets, gameservers, gameserversets, gameserverallocations",
+        "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
       },
       {
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "\"\"",
-          "value": "\"\""
+          "selected": true,
+          "text": "\"status\"",
+          "value": "\"status\""
         },
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": null,
@@ -729,7 +840,7 @@
         "name": "Subresource",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "\"status\"",
             "value": "\"status\""
           },
@@ -739,25 +850,31 @@
             "value": "\"scale\""
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "\"\"",
             "value": "\"\""
           }
         ],
         "query": "\"status\", \"scale\", \"\"",
+        "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
       },
       {
         "allValue": null,
         "current": {
-          "text": "All",
+          "selected": true,
+          "text": [
+            "All"
+          ],
           "value": [
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": "${Prometheus}",
         "definition": "label_values(verb)",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -768,54 +885,12 @@
             "selected": true,
             "text": "All",
             "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "CONNECT",
-            "value": "CONNECT"
-          },
-          {
-            "selected": false,
-            "text": "CREATE",
-            "value": "CREATE"
-          },
-          {
-            "selected": false,
-            "text": "DELETE",
-            "value": "DELETE"
-          },
-          {
-            "selected": false,
-            "text": "DELETECOLLECTION",
-            "value": "DELETECOLLECTION"
-          },
-          {
-            "selected": false,
-            "text": "GET",
-            "value": "GET"
-          },
-          {
-            "selected": false,
-            "text": "PATCH",
-            "value": "PATCH"
-          },
-          {
-            "selected": false,
-            "text": "POST",
-            "value": "POST"
-          },
-          {
-            "selected": false,
-            "text": "PUT",
-            "value": "PUT"
-          },
-          {
-            "selected": false,
-            "text": "UPDATE",
-            "value": "UPDATE"
           }
         ],
-        "query": "label_values(verb)",
+        "query": {
+          "query": "",
+          "refId": "Prometheus-Verb-Variable-Query"
+        },
         "refresh": 0,
         "regex": "/[^WATCH][^LIST]/",
         "skipUrlSync": false,
@@ -860,5 +935,5 @@
   "timezone": "",
   "title": "Agones Controller API Server Requests",
   "uid": "1NHaKICiz",
-  "version": 1
+  "version": 411
 }

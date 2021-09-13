@@ -8,7 +8,7 @@ metadata:
     {{- include "agones-dashboards.labels" . | nindent 4 }}
   annotations:
     {{- if .Values.targetFolder }}
-    k8s-sidecar-target-directory: "{{ .Values.dashboards.targetFolder }}"
+    k8s-sidecar-target-directory: "{{ .Values.targetFolder }}"
     {{- end }}
 data:
 {{ range $path, $_ :=  .Files.Glob  "dashboards/*.json" }}

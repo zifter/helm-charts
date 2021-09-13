@@ -18,8 +18,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 6,
-  "iteration": 1548342576612,
+  "iteration": 1631545801738,
   "links": [],
   "panels": [
     {
@@ -28,13 +27,19 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 8,
         "x": 0,
         "y": 0
       },
+      "hiddenSeries": false,
       "id": 2,
       "legend": {
         "avg": false,
@@ -49,7 +54,11 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -69,6 +78,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Workqueue depth",
       "tooltip": {
@@ -113,13 +123,19 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 8,
         "x": 8,
         "y": 0
       },
+      "hiddenSeries": false,
       "id": 4,
       "legend": {
         "avg": false,
@@ -134,7 +150,11 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -154,6 +174,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Workqueue items rate",
       "tooltip": {
@@ -198,13 +219,19 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 8,
         "x": 16,
         "y": 0
       },
+      "hiddenSeries": false,
       "id": 8,
       "legend": {
         "avg": false,
@@ -219,7 +246,11 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -239,6 +270,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Workqueue retry items rate",
       "tooltip": {
@@ -284,13 +316,19 @@
       "dashes": false,
       "datasource": null,
       "description": "How long an item stays in the work queue.",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 0,
         "y": 9
       },
+      "hiddenSeries": false,
       "id": 6,
       "legend": {
         "avg": false,
@@ -305,7 +343,11 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -325,6 +367,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Workqueue average items duration",
       "tooltip": {
@@ -370,13 +413,19 @@
       "dashes": false,
       "datasource": null,
       "description": "How long processing an item from the work queue takes.",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
       "fill": 1,
+      "fillGradient": 0,
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 12,
         "y": 9
       },
+      "hiddenSeries": false,
       "id": 7,
       "legend": {
         "avg": false,
@@ -391,7 +440,11 @@
       "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
       "percentage": false,
+      "pluginVersion": "7.5.5",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -411,6 +464,7 @@
       ],
       "thresholds": [],
       "timeFrom": null,
+      "timeRegions": [],
       "timeShift": null,
       "title": "Workqueue average work duration",
       "tooltip": {
@@ -451,7 +505,7 @@
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 16,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [
     "agones",
@@ -461,23 +515,50 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "default",
+          "value": "default"
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "Prometheus",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": ".*",
         "current": {
+          "selected": false,
           "text": "All",
-          "value": [
-            "$__all"
-          ]
+          "value": "$__all"
         },
-        "datasource": "Prometheus",
+        "datasource": "${Prometheus}",
+        "definition": "label_values(agones_k8s_client_workqueue_items_total,queue_name)",
+        "description": null,
+        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "workqueue",
         "multi": true,
         "name": "workqueue",
         "options": [],
-        "query": "label_values(agones_k8s_client_workqueue_items_total,queue_name)",
+        "query": {
+          "query": "label_values(agones_k8s_client_workqueue_items_total,queue_name)",
+          "refId": "StandardVariableQuery"
+        },
         "refresh": 2,
         "regex": "",
+        "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
@@ -519,5 +600,5 @@
   "timezone": "",
   "title": "Agones Controller go-client workqueue",
   "uid": "bztnCilik",
-  "version": 10
+  "version": 2
 }
