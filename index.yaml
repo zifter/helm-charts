@@ -1,5 +1,24 @@
 apiVersion: v1
 entries:
+  agones-dashboards:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-09-13T11:52:16.193341576Z"
+    description: A Helm chart of agones dashboards. Provide grafana dashboards.
+    digest: 4555e518647193ff0f823c9f31d7f1e205f4b9fcad1500365d1fde779bbaf9ef
+    home: https://github.com/googleforgames/agones
+    icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
+    maintainers:
+    - email: zifter.ai+github@gmail.com
+      name: zifter
+      url: https://github.com/zifter
+    name: agones-dashboards
+    sources:
+    - https://github.com/googleforgames/agones
+    type: application
+    urls:
+    - https://github.com/zifter/helm-charts/releases/download/agones-dashboards-1.16.0/agones-dashboards-1.16.0.tgz
+    version: 1.16.0
   clickhouse-exporter:
   - apiVersion: v2
     appVersion: latest
@@ -309,6 +328,26 @@ entries:
   zookeeper-exporter:
   - apiVersion: v2
     appVersion: latest
+    created: "2021-09-13T11:52:16.325182732Z"
+    description: A Helm chart of zookeeper exporter. Provide prometheus metrics, alerts
+      and dashboard.
+    digest: 708edaaebd7de835a4782768b0a6af40aa4e148f0d746e5011ef88ff0a6839dd
+    home: https://github.com/zifter/helm-charts
+    icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
+    maintainers:
+    - email: zifter.ai+github@gmail.com
+      name: zifter
+      url: https://github.com/zifter
+    name: zookeeper-exporter
+    sources:
+    - https://github.com/zifter/helm-charts/tree/main/charts/zookeeper-exporter
+    - https://github.com/dabealu/zookeeper-exporter
+    type: application
+    urls:
+    - https://github.com/zifter/helm-charts/releases/download/zookeeper-exporter-0.1.1/zookeeper-exporter-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: latest
     created: "2021-09-12T09:20:12.649279175Z"
     description: A Helm chart of zookeeper exporter. Provide prometheus metrics, alerts
       and dashboard.
@@ -327,4 +366,4 @@ entries:
     urls:
     - https://github.com/zifter/helm-charts/releases/download/zookeeper-exporter-0.1.0/zookeeper-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-12T09:29:41.618271586Z"
+generated: "2021-09-13T11:52:16.325245138Z"
