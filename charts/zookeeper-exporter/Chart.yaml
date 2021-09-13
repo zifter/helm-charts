@@ -2,7 +2,7 @@ apiVersion: v2
 name: zookeeper-exporter
 description: A Helm chart of zookeeper exporter. Provide prometheus metrics, alerts and dashboard.
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "latest"
 icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
 home: https://github.com/zifter/helm-charts

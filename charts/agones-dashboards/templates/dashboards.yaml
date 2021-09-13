@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "agones-dashboards.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- .Values.labels | toYaml | nindent 4 }}
+    {{- include "agones-dashboards.labels" . | nindent 4 }}
+  annotations:
+    {{- if .Values.targetFolder }}
+    k8s-sidecar-target-directory: "{{ .Values.dashboards.targetFolder }}"
+    {{- end }}
+data:
+{{ range $path, $_ :=  .Files.Glob  "dashboards/*.json" }}
+  agones-{{ $path | trimPrefix "dashboards/" }}:
+      {{ $.Files.Get $path | toPrettyJson }}
+{{ end }}

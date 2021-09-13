@@ -116,6 +116,14 @@ releases:
     values:
       - releases/values-zookeeper-operator.yaml
 
+  # Agones dashboards
+  - name: agones-dashboards
+    namespace: monitoring
+    chart: ../../charts/agones-dashboards
+    condition: agonesDashboards.enabled
+    needs:
+      - prometheus
+
 environments:
   default:
     values:
@@ -126,4 +134,6 @@ environments:
       - clickhouseExporter:
           enabled: true
       - zookeeperExporter:
+          enabled: true
+      - agonesDashboards:
           enabled: true

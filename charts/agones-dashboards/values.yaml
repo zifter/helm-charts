@@ -1,0 +1,18 @@
+# Default values for agones-dashboards
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+# Labels to add dashboard
+labels:
+  # default grafana dashboard discovery label with stub value
+  # Override this value if you use custom grafana label
+  # https://github.com/grafana/helm-charts/blob/grafana-6.16.3/charts/grafana/values.yaml#L629
+  grafana_dashboard: '1'
+# Folder to put dashboard in grafana
+# Will be used default if it's empty
+targetFolder: ""
