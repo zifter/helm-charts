@@ -3,9 +3,9 @@ name: lock-inactive
 on:
   push:
     branches:
-      - 'master'
+      - "main"
   schedule:
-    - cron: '0 * * * *'
+    - cron: "0 * * * *"
 
 jobs:
   lock:
