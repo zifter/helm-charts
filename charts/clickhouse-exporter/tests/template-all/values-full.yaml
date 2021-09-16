@@ -100,7 +100,7 @@ metrics:
   interval: 1m
 
 # Clickhouse clusters to export metrics
-cliclhouse:
+clickhouse:
   - name: cluster-with-auth
     hosts:
      - clickhouse-auth-1

@@ -128,7 +128,6 @@ kafka: []
 #    mechanism: null
 #    # list of brokers of cluster to monitor
 #    brokers:
-##      - host1
-##      - host2
-##      - host2
-#
+#      - host1
+#      - host2
+#      - host2

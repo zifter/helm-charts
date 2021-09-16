@@ -1,0 +1,77 @@
+suite: test deployment
+templates:
+  - deployment.yaml
+tests:
+  - it: render one cluster
+    set:
+      kafka:
+        - # cluster name
+          name: cluster
+          # list of brokers of cluster to monitor
+          brokers:
+            - host1
+            - host2
+    asserts:
+      - hasDocuments:
+          count: 1
+
+  - it: set image
+    set:
+      image:
+        tag: 1.14.0
+        repository: zifter/my_kafka_exporter
+      kafka:
+        - # cluster name
+          name: cluster
+          # list of brokers of cluster to monitor
+          brokers:
+            - host1
+            - host2
+    documentIndex: 0
+    release:
+      name: my-release
+    asserts:
+      - isKind:
+          of: Deployment
+      - matchRegex:
+          path: metadata.name
+          pattern: my-release-kafka-exporter-cluster
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: zifter/my_kafka_exporter:1.14.0
+
+  - it: render two clusters
+    set:
+      image:
+        tag: 1.14.0
+        repository: zifter/my_clickhouse_exporter
+      kafka:
+        - # cluster name
+          name: cluster
+          # list of brokers of cluster to monitor
+          brokers:
+            - host1
+            - host2
+        - # cluster name
+          name: cluster-with-auth
+          # if sasl is enabled provide user
+          user: null
+          # if sasl is enabled provide password
+          password: null
+          # SASL mechanism can be plain, scram-sha512, scram-sha256
+          mechanism: null
+          # list of brokers of cluster to monitor
+          brokers:
+            - host1
+            - host2
+            - host2
+
+    documentIndex: 1
+    release:
+      name: my-release
+    asserts:
+      - isKind:
+          of: Deployment
+      - matchRegex:
+          path: metadata.name
+          pattern: my-release-kafka-exporter-cluster-with-auth

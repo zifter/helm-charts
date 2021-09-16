@@ -1,0 +1,77 @@
+suite: test deployment
+templates:
+  - deployment.yaml
+tests:
+  - it: render one cluster
+    set:
+      zookeeper:
+        - # cluster name
+          name: cluster
+          # list of brokers of cluster to monitor
+          hosts:
+            - host1:2181
+            - host2:2181
+    asserts:
+      - hasDocuments:
+          count: 1
+
+  - it: set image
+    set:
+      image:
+        tag: 1.14.0
+        repository: zifter/my_zookeeper_exporter
+      zookeeper:
+        - # cluster name
+          name: cluster
+          # list of brokers of cluster to monitor
+          hosts:
+            - host1:2181
+            - host2:2181
+    documentIndex: 0
+    release:
+      name: my-release
+    asserts:
+      - isKind:
+          of: Deployment
+      - matchRegex:
+          path: metadata.name
+          pattern: my-release-zookeeper-exporter-cluster
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: zifter/my_zookeeper_exporter:1.14.0
+
+  - it: render two clusters
+    set:
+      image:
+        tag: 1.14.0
+        repository: zifter/my_zookeeper_exporter
+      zookeeper:
+        - # cluster name
+          name: cluster
+          # list of brokers of cluster to monitor
+          hosts:
+            - host1:2181
+            - host2:2181
+        - # cluster name
+          name: cluster-with-auth
+          # if sasl is enabled provide user
+          user: null
+          # if sasl is enabled provide password
+          password: null
+          # SASL mechanism can be plain, scram-sha512, scram-sha256
+          mechanism: null
+          # list of brokers of cluster to monitor
+          hosts:
+            - host1:2181
+            - host2:2181
+            - host2:2181
+
+    documentIndex: 1
+    release:
+      name: my-release
+    asserts:
+      - isKind:
+          of: Deployment
+      - matchRegex:
+          path: metadata.name
+          pattern: my-release-zookeeper-exporter-cluster-with-auth

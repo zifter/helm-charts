@@ -5,7 +5,7 @@
         "affinity": {
             "type": "object"
         },
-        "cliclhouse": {
+        "clickhouse": {
             "type": "array",
             "items": {
                 "type": "object",
