@@ -55,6 +55,13 @@ Install [https://github.com/karuppiah7890/helm-schema-gen](helm-schema-gen) spec
 helm plugin install https://github.com/karuppiah7890/helm-schema-gen.git
 ```
 
+#### Install helm-unittest
+Install [https://github.com/quintush/helm-unittest](helm-unittest) special plugin to test helm
+
+```bash
+helm plugin install https://github.com/quintush/helm-unittest
+```
+
 ### Launching test cluster with all dependencies
 ```bash
 ./dev/cluster/run.sh

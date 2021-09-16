@@ -1,0 +1,19 @@
+suite: test deployment
+templates:
+  - deployment.yaml
+tests:
+  - it: image
+    set:
+      image:
+        tag: 1.14.0
+        repository: zifter/my_domain_exporter
+
+    asserts:
+      - isKind:
+          of: Deployment
+      - matchRegex:
+          path: metadata.name
+          pattern: -domain-exporter$
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: zifter/my_domain_exporter:1.14.0

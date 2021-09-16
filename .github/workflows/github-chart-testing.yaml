@@ -1,7 +1,7 @@
 name: Run Helm Test Cases
 on: pull_request
 jobs:
-  Helm-Template-All:
+  Helm-Run-Tests:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -10,7 +10,9 @@ jobs:
       - name: Run Tests
         uses: WyriHaximus/github-action-helm3@v2
         with:
-          exec: ${{ github.workspace }}/dev/run-tests.sh
+          exec: |-
+            helm plugin install https://github.com/quintush/helm-unittest &&
+            /github/workspace/dev/run-tests.sh
 
   Helm-Lint:
     runs-on: ubuntu-latest

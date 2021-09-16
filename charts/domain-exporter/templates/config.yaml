@@ -9,5 +9,5 @@ data:
   domains.yaml: |-
     domains:
     {{- range .Values.domains }}
-    - {{ . }}
+      - {{ . }}
     {{- end }}

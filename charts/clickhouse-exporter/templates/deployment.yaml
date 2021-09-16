@@ -1,3 +1,7 @@
+{{- if not .Values.clickhouse }}
+{{- required "Clickhouse clusters is required to be set!" "" }}
+{{- end }}
+
 {{- range .Values.clickhouse }}
 {{- $_ := set $ "name" .name }}
 {{- $_ := set $ "user" .user }}

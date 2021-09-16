@@ -1,0 +1,10 @@
+suite: test dashboards
+templates:
+  - dashboards.yaml
+tests:
+  - it: should render nothing if not enabled
+    set:
+      dashboards.enabled: false
+    asserts:
+      - hasDocuments:
+          count: 0
