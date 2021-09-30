@@ -12,7 +12,7 @@
       }
     ]
   },
-  "description": "For more information, please visit https://github.com/zifter/helm-charts/tree/main/charts/zookeepere-exporter",
+  "description": "For more information, please visit https://github.com/zifter/helm-charts/tree/main/charts/zookeeper-exporter",
   "editable": true,
   "gnetId": 11442,
   "graphTooltip": 0,

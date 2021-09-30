@@ -1,0 +1,15 @@
+suite: test service monitor
+templates:
+  - service-monitor.yaml
+tests:
+  - it: render by default
+    asserts:
+      - hasDocuments:
+          count: 1
+
+  - it: should render nothing if not enabled
+    set:
+      metrics.enabled: false
+    asserts:
+      - hasDocuments:
+          count: 0

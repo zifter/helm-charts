@@ -1,0 +1,66 @@
+suite: test deployment
+templates:
+  - deployment.yaml
+tests:
+  - it: render by default
+    set:
+      clickhouse:
+        - name: cluster-with-auth
+          hosts:
+           - clickhouse-auth-1
+        - name: cluster-name
+          user: user
+          password: pass
+          hosts:
+           - clickhouse-host-1
+           - clickhouse-host-2
+    asserts:
+      - hasDocuments:
+          count: 3
+
+  - it: image
+    set:
+      image:
+        tag: 1.14.0
+        repository: zifter/my_clickhouse_exporter
+      clickhouse:
+        - name: cluster
+          hosts:
+           - clickhouse
+    documentIndex: 0
+    release:
+      name: my-release
+    asserts:
+      - isKind:
+          of: Deployment
+      - matchRegex:
+          path: metadata.name
+          pattern: my-release-clickhouse-exporter-cluster-0
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: zifter/my_clickhouse_exporter:1.14.0
+
+  - it: image
+    set:
+      image:
+        tag: 1.14.0
+        repository: zifter/my_clickhouse_exporter
+      clickhouse:
+        - name: cluster-with-auth
+          hosts:
+           - clickhouse-auth-1
+        - name: cluster-name
+          user: user
+          password: pass
+          hosts:
+           - clickhouse-host-1
+           - clickhouse-host-2
+    documentIndex: 2
+    release:
+      name: my-release
+    asserts:
+      - isKind:
+          of: Deployment
+      - matchRegex:
+          path: metadata.name
+          pattern: my-release-clickhouse-exporter-cluster-name-1

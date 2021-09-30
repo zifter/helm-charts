@@ -1,0 +1,8 @@
+suite: test dashboards
+templates:
+  - dashboards.yaml
+tests:
+  - it: render by default
+    asserts:
+      - hasDocuments:
+          count: 1
