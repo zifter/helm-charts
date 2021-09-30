@@ -7,6 +7,7 @@ helm repo add zifter https://github.com/zifter/helm-charts
 ```
 
 ## List of charts in this repository
+* [agones-dashboards](charts/agones-dashboards/README.md)
 * [domain-exporter](charts/domain-exporter/README.md)
 * [kafka-exporter](charts/kafka-exporter/README.md)
 * [clickhouse-exporter](charts/clickhouse-exporter/README.md)
