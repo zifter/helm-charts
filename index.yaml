@@ -421,6 +421,16 @@ entries:
     urls:
     - https://github.com/zifter/helm-charts/releases/download/kafka-exporter-0.1.0/kafka-exporter-0.1.0.tgz
     version: 0.1.0
+  tls-secret:
+  - apiVersion: v2
+    created: "2021-12-08T18:03:50.462720639Z"
+    description: Chart for tls secret
+    digest: 8be2c24b1d8c51f92af74bc1be9f9c1fcc84d6d564e8d50645ce88f93dcdd304
+    name: tls-secret
+    type: application
+    urls:
+    - https://github.com/zifter/helm-charts/releases/download/tls-secret-0.1.0/tls-secret-0.1.0.tgz
+    version: 0.1.0
   zookeeper-exporter:
   - apiVersion: v2
     appVersion: latest
@@ -482,4 +492,4 @@ entries:
     urls:
     - https://github.com/zifter/helm-charts/releases/download/zookeeper-exporter-0.1.0/zookeeper-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2021-09-16T20:59:24.130015187Z"
+generated: "2021-12-08T18:03:50.462769739Z"
