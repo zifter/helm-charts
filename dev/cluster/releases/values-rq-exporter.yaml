@@ -1,0 +1,4 @@
+rq:
+  - name: rq
+    host: redis-master.test.svc.cluster.local
+    index: 1

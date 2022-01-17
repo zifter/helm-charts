@@ -114,6 +114,7 @@ releases:
   - name: zookeeper
     namespace: test
     chart: bitnami/zookeeper
+    version: 7.6.1
     condition: zookeeperExporter.enabled
     values:
       - releases/values-zookeeper-operator.yaml
@@ -141,6 +142,25 @@ releases:
     needs:
       - prometheus
 
+  # rq exporter
+  - name: redis
+    namespace: test
+    chart: bitnami/redis
+    version: 15.5.1
+    condition: rqExporter.enabled
+    values:
+      - releases/values-redis.yaml
+
+  - name: rq-exporter
+    namespace: monitoring
+    chart: ../../charts/rq-exporter
+    condition: rqExporter.enabled
+    needs:
+      - redis
+      - prometheus
+    values:
+      - releases/values-rq-exporter.yaml
+
 environments:
   default:
     values:
@@ -153,4 +173,6 @@ environments:
       - zookeeperExporter:
           enabled: true
       - agonesDashboards:
+          enabled: true
+      - rqExporter:
           enabled: true

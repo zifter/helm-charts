@@ -1,0 +1,15 @@
+suite: test rules
+templates:
+  - rules.yaml
+tests:
+  - it: render by default
+    asserts:
+      - hasDocuments:
+          count: 1
+
+  - it: should render nothing if not enabled
+    set:
+      rules.enabled: false
+    asserts:
+      - hasDocuments:
+          count: 0

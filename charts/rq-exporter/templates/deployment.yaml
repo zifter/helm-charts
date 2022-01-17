@@ -1,0 +1,70 @@
+{{- range .Values.rq }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "rq-exporter.fullname" $ }}-{{ .name  | lower | replace "_" "-" }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "rq-exporter.labels" $ | nindent 4 }}
+spec:
+  replicas: {{ $.Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "rq-exporter.selectorLabels" $ | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+      {{- with $.Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "rq-exporter.selectorLabels" $ | nindent 8 }}
+    spec:
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "rq-exporter.serviceAccountName" $ }}
+      securityContext:
+        {{- toYaml $.Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ $.Chart.Name }}
+          securityContext:
+            {{- toYaml $.Values.securityContext | nindent 12 }}
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}
+          args:
+            - "--port"
+            - "9726"
+            - "--redis-host"
+            - {{ required "host parameter is required!" .host | quote }}
+            - "--redis-port"
+            - {{ .port | default 6379 | quote }}
+            - "--redis-db"
+            - {{ .index | default 0 | quote }}
+          ports:
+            - name: http
+              containerPort: 9726
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 9726
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

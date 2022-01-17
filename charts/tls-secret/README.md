@@ -10,7 +10,7 @@ helm repo add zifter https://zifter.github.io/helm-charts/
 
 ### Install chart
 ```bash
-helm install tls-secret zifter/tls-secret --namespace kube-system -f values-domain.yaml
+helm install tls-secret zifter/tls-secret --namespace kube-system -f values-prod.yaml
 ```
 
 where values-domain.yaml is:
