@@ -1,5 +1,14 @@
 apiVersion: v2
 name: tls-secret
-description: Chart for tls secret
+description: A Helm chart of tls secret.
 type: application
-version: 0.1.0
+version: 0.1.1
+appVersion: ""
+icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
+home: https://github.com/zifter/helm-charts
+sources:
+  - https://github.com/zifter/helm-charts/tree/main/charts/tls-secret
+maintainers:
+  - name: zifter
+    email: zifter.ai+github@gmail.com
+    url: https://github.com/zifter

@@ -1,0 +1,13 @@
+{{ if .Values.rules.enabled }}
+kind: PrometheusRule
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: {{ include "rq-exporter.fullname" . }}-rules
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "rq-exporter.labels" . | nindent 4 }}
+spec:
+  groups:
+    - name: RQ
+      rules: []
+{{ end }}

@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "tls": {
+            "type": "object",
+            "properties": {
+                "crt": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

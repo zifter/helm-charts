@@ -12,6 +12,7 @@ helm repo add zifter https://github.com/zifter/helm-charts
 * [kafka-exporter](charts/kafka-exporter/README.md)
 * [clickhouse-exporter](charts/clickhouse-exporter/README.md)
 * [zookeeper-exporter](charts/zookeeper-exporter/README.md)
+* [rq-exporter](charts/rq-exporter/README.md)
 * [tls-secret](charts/tls-secret/README.md)
 
 ## List of usefull charts in other repository
