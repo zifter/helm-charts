@@ -421,7 +421,45 @@ entries:
     urls:
     - https://github.com/zifter/helm-charts/releases/download/kafka-exporter-0.1.0/kafka-exporter-0.1.0.tgz
     version: 0.1.0
+  rq-exporter:
+  - apiVersion: v2
+    appVersion: v1.9.2
+    created: "2022-01-17T21:54:05.158598487Z"
+    description: A Helm chart of rq exporter. Provide prometheus metrics, alerts and
+      dashboard.
+    digest: b45586d6a5b2fed1efb65999560c3b1092abb2aa30ccaf84aec52322bd6a6d38
+    home: https://github.com/zifter/helm-charts
+    icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
+    maintainers:
+    - email: zifter.ai+github@gmail.com
+      name: zifter
+      url: https://github.com/zifter
+    name: rq-exporter
+    sources:
+    - https://github.com/zifter/helm-charts/tree/main/charts/rq-exporter
+    - https://github.com/mdawar/rq-exporter
+    type: application
+    urls:
+    - https://github.com/zifter/helm-charts/releases/download/rq-exporter-0.1.0/rq-exporter-0.1.0.tgz
+    version: 0.1.0
   tls-secret:
+  - apiVersion: v2
+    created: "2022-01-17T21:54:05.275679171Z"
+    description: A Helm chart of tls secret.
+    digest: 19d82c7d8cf03bcd593630faede1f68307e4340ed751184639d5abb8fb68fe8f
+    home: https://github.com/zifter/helm-charts
+    icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
+    maintainers:
+    - email: zifter.ai+github@gmail.com
+      name: zifter
+      url: https://github.com/zifter
+    name: tls-secret
+    sources:
+    - https://github.com/zifter/helm-charts/tree/main/charts/tls-secret
+    type: application
+    urls:
+    - https://github.com/zifter/helm-charts/releases/download/tls-secret-0.1.1/tls-secret-0.1.1.tgz
+    version: 0.1.1
   - apiVersion: v2
     created: "2021-12-08T18:03:50.462720639Z"
     description: Chart for tls secret
@@ -492,4 +530,4 @@ entries:
     urls:
     - https://github.com/zifter/helm-charts/releases/download/zookeeper-exporter-0.1.0/zookeeper-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2021-12-08T18:03:50.462769739Z"
+generated: "2022-01-17T21:54:05.276096277Z"
