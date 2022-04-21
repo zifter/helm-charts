@@ -81,7 +81,11 @@ affinity: {}
 # Prometheus rules
 rules:
   enabled: true
-  # TODO
+  failedJobs:
+    enabled: true
+    threshold: 0
+    queues: []
+
 
 # Grafana dashboards
 dashboards:
