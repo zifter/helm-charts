@@ -2,7 +2,7 @@ apiVersion: v2
 name: rq-exporter
 description: A Helm chart of rq exporter. Provide prometheus metrics, alerts and dashboard.
 type: application
-version: 0.2.0
+version: 0.2.1
 appVersion: v1.9.2
 icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
 home: https://github.com/zifter/helm-charts

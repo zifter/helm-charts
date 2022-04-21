@@ -12,7 +12,7 @@ spec:
       rules:
 {{- if .Values.rules.failedJobs.enabled }}
         - alert: RQJobFailed
-          expr: sum(rq_jobs{queue=~{{ join  " | " .Values.rules.failedJobs.queues  | quote }}, status="failed"}) > {{ .Values.rules.failedJobs.threshold}}
+          expr: sum(rq_jobs{queue=~{{ join  "|" .Values.rules.failedJobs.queues  | quote }}, status="failed"}) > {{ .Values.rules.failedJobs.threshold}}
           for: 1m
           labels:
             severity: critical
