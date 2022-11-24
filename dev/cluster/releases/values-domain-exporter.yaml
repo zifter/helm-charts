@@ -1,0 +1,27 @@
+dashboards:
+  targetFolder: "domains"
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  hosts:
+    - host: localhost
+      paths:
+        - path: "/domain-exporter(/|$)(.*)"
+          pathType: Prefix
+
+domains:
+  - google.com
+  - habr.ru
+  - github.com
+  - vaikutis.lt
+  - amazon.pl
+  - amazon.com
+  - amazon.de
+  - ok.ru
+  - flibusta.site
+  - domain-failed.com
+  - viva64.com
+  - ted.com

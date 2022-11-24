@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: zifter/domain_exporter
-  pullPolicy: IfNotPresent
+  repository: caarlos0/domain_exporter
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
@@ -78,22 +78,43 @@ tolerations: []
 
 affinity: {}
 
+# Prometheus rules
 rules:
   enabled: true
-  expiration:
-    warning: 60  # days
-    critical: 5  # days
+  # Alert with warning severity if metrics is absent
+  absent:
+    enabled: true
+  # Alert with warning severity if expiration time is less then provided
+  warning:
+    enabled: true
+    expiration: 60  # days
+  # Alert with critical severity alert if expiration time is less then provided
+  critical:
+    enabled: true
+    expiration: 5  # days
+  # Alert on failure to detect expiration time
+  failed:
+    enabled: true
 
+# Grafana dashboard with representation of monitoring domains
 dashboards:
   enabled: true
-  label:
-    # default grafana dashboard discovery label
+  # Labels to add dashboard
+  labels:
+    # default grafana dashboard discovery label with stub value
+    # Override this value if you use custom grafana label
+    # https://github.com/grafana/helm-charts/blob/grafana-6.16.3/charts/grafana/values.yaml#L629
     grafana_dashboard: '1'
+  # Folder to put dashboard in grafana
+  # Will be used default if it's empty
   targetFolder: ""
 
+# Prometheus service monitor
 metrics:
   enabled: true
+  # Interval between metrics scraping
   interval: 1m
 
+# List of domains to monitor
 domains:
   - google.com

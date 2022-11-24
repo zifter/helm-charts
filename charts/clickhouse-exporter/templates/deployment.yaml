@@ -1,0 +1,84 @@
+{{- if not .Values.clickhouse }}
+{{- required "Clickhouse clusters is required to be set!" "" }}
+{{- end }}
+
+{{- range .Values.clickhouse }}
+{{- $_ := set $ "name" .name }}
+{{- $_ := set $ "user" .user }}
+{{- $_ := set $ "password" .password }}
+
+{{- range $i, $host := .hosts }}
+{{- $_ := set $ "clickhouse_host" $host }}
+{{- $_ := set $ "clickhouse_host_index" $i }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "clickhouse-exporter.fullname" $ }}-{{ $.name  | lower | replace "_" "-" | replace "." "-" }}-{{ $.clickhouse_host_index }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "clickhouse-exporter.labels" $ | nindent 4 }}
+spec:
+  replicas: {{ $.Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "clickhouse-exporter.selectorLabels" $ | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+      {{- with $.Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "clickhouse-exporter.selectorLabels" $ | nindent 8 }}
+    spec:
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "clickhouse-exporter.serviceAccountName" $ }}
+      securityContext:
+        {{- toYaml $.Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ $.Chart.Name }}
+          securityContext:
+            {{- toYaml $.Values.securityContext | nindent 12 }}
+          image: "{{ $.Values.image.repository }}:{{ $.Values.image.tag | default $.Chart.AppVersion }}"
+          imagePullPolicy: {{ $.Values.image.pullPolicy }}
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}
+          env:
+            - name: CLICKHOUSE_USER
+              value: {{ $.user | default "" }}
+            - name: CLICKHOUSE_PASSWORD
+              value: {{ $.password | default "" }}
+          args:
+            - "-scrape_uri=http://{{$.clickhouse_host}}:8123"
+            - "-telemetry.address=0.0.0.0:9308"
+          ports:
+            - name: http
+              containerPort: 9308
+              protocol: TCP
+#          livenessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+#          readinessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+      {{- with $.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+{{- end }}
+{{- end }}

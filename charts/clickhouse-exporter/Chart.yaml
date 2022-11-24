@@ -1,0 +1,15 @@
+apiVersion: v2
+name: clickhouse-exporter
+description: A Helm chart of clickhouse exporter. Provide prometheus metrics, alerts and dashboard.
+type: application
+version: 0.1.3
+appVersion: "latest"
+icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
+home: https://github.com/zifter/helm-charts
+sources:
+  - https://github.com/zifter/helm-charts/tree/main/charts/clickhouse-exporter
+  - https://github.com/ClickHouse/clickhouse_exporter
+maintainers:
+  - name: zifter
+    email: zifter.ai+github@gmail.com
+    url: https://github.com/zifter

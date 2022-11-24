@@ -1,0 +1,46 @@
+{{ if .Values.rules.enabled }}
+kind: PrometheusRule
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: {{ include "kafka-exporter.fullname" . }}-rules
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "kafka-exporter.labels" . | nindent 4 }}
+spec:
+  groups:
+    - name: Kafka
+      rules:
+{{- if .Values.rules.minReplicas.enabled }}
+        - alert: KafkaTooSmallReplicas
+          expr: sum(kafka_topic_partition_in_sync_replica) by (topic,instance) < {{ .Values.rules.minReplicas.count }}
+          for: 0m
+          labels:
+            severity: critical
+          annotations:
+            summary: Kafka topics replicas (instance {{`{{`}} $labels.instance {{`}}`}}) must be more or equal than {{ .Values.rules.minReplicas.count }}
+            description: Kafka topic in-sync partition\n  VALUE = {{`{{`}} $value {{`}}`}}\n  LABELS= {{`{{`}} $labels {{`}}`}}
+{{- end }}
+
+{{- if .Values.rules.minPartitions.enabled }}
+        - alert: KafkaTopicsReplicas
+          expr: sum(kafka_topic_partitions) by (topic,instance) < {{ .Values.rules.minPartitions.count }}
+          for: 0m
+          labels:
+            severity: critical
+          annotations:
+            summary: Kafka partition (instance {{`{{`}} $labels.instance {{`}}`}}) must be more or equal than {{ .Values.rules.minPartitions.count }}
+            description: Kafka topic in-sync partition\n  VALUE = {{`{{`}} $value {{`}}`}}\n  LABELS= {{`{{`}} $labels {{`}}`}}
+{{- end }}
+
+{{- if .Values.rules.consumerGroupLag.enabled }}
+        - alert: KafkaConsumersGroup
+          expr: sum(kafka_consumergroup_lag{consumergroup!~"({{ .Values.rules.consumerGroupLag.excludeGroups | join "|" }})"}) by (consumergroup) > {{ .Values.rules.consumerGroupLag.threshold }}
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: Kafka consumers group (instance {{`{{`}} $labels.instance {{`}}`}})
+            description: Kafka consumers group\n  VALUE = {{`{{`}} $value {{`}}`}}\n  LABELS= {{`{{`}} $labels {{`}}`}}
+{{- end }}
+
+{{- end }}

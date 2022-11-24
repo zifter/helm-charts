@@ -1,0 +1,23 @@
+{{ if .Values.rules.enabled }}
+kind: PrometheusRule
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: {{ include "rq-exporter.fullname" . }}-rules
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "rq-exporter.labels" . | nindent 4 }}
+spec:
+  groups:
+    - name: RQ
+      rules:
+{{- if .Values.rules.failedJobs.enabled }}
+        - alert: RQJobFailed
+          expr: sum(rq_jobs{queue=~{{ join  "|" .Values.rules.failedJobs.queues  | quote }}, status="failed"}) > {{ .Values.rules.failedJobs.threshold}}
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: Jobs of queues {{ join  ", " .Values.rules.failedJobs.queues  | quote }} crashed
+            description: Jobs of queues {{ join  ", " .Values.rules.failedJobs.queues  | quote }} crashed
+{{- end}}
+{{- end }}

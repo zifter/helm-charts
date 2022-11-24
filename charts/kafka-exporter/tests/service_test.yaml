@@ -1,0 +1,45 @@
+suite: test service
+templates:
+  - service.yaml
+tests:
+  - it: should pass
+    release:
+      name: my-release
+    set:
+      service:
+        type: ClusterIP
+    asserts:
+      - contains:
+          path: spec.ports
+          content:
+            port: 80
+            targetPort: http
+            protocol: TCP
+            name: http
+      - equal:
+          path: spec.type
+          value: ClusterIP
+      - equal:
+          path: spec.selector
+          value:
+            app.kubernetes.io/instance: my-release
+            app.kubernetes.io/name: kafka-exporter
+
+
+  - it: should render right if values given
+    set:
+      service:
+        type: NodePort
+        port: 1234
+        name: cool-service
+    asserts:
+      - contains:
+          path: spec.ports
+          content:
+            port: 1234
+            protocol: TCP
+            name: http
+            targetPort: http
+      - equal:
+          path: spec.type
+          value: NodePort

@@ -1,0 +1,178 @@
+repositories:
+- name: ingress-nginx
+  url: https://kubernetes.github.io/ingress-nginx
+- name: prometheus-community
+  url: https://prometheus-community.github.io/helm-charts
+- name: bitnami
+  url: https://charts.bitnami.com/bitnami
+- name: slamdev
+  url: https://slamdev.github.io/helm-charts
+- name: agones
+  url: https://agones.dev/chart/stable
+
+helmDefaults:
+  wait: true
+  timeout: 300
+
+commonLabels:
+  tier: monitoring
+
+releases:
+  - name: prometheus
+    namespace: monitoring
+    chart: prometheus-community/kube-prometheus-stack
+    version: 18.0.1
+    values:
+      - releases/values-prometheus-stack.yaml
+
+  - name: ingress-nginx
+    namespace: kube-system
+    chart: ingress-nginx/ingress-nginx
+    version: 3.36.0
+    values:
+      - releases/values-ingress-nginx.yaml
+    needs:
+      - prometheus
+
+  # Domain exporter
+  - name: domain-exporter
+    namespace: monitoring
+    chart: ../../charts/domain-exporter
+    condition: domainExporter.enabled
+    values:
+      - releases/values-domain-exporter.yaml
+    needs:
+      - prometheus
+      - ingress-nginx
+
+  # Kafka exporter
+  - name: kafka-exporter
+    namespace: monitoring
+    chart: ../../charts/kafka-exporter
+    condition: kafkaExporter.enabled
+    values:
+      - releases/values-kafka-exporter.yaml
+    needs:
+      - prometheus
+      - ingress-nginx
+
+  - name: kafka
+    namespace: test
+    chart: bitnami/kafka
+    version: 14.1.0
+    condition: kafkaExporter.enabled
+    values:
+      - releases/values-kafka.yaml
+
+  - name: kafka-sasl
+    namespace: test
+    chart: bitnami/kafka
+    version: 14.1.0
+    condition: kafkaExporter.enabled
+    values:
+      - releases/values-kafka-sasl.yaml
+
+  # clickhouse exporter
+  - name: clickhouse-exporter
+    namespace: monitoring
+    chart: ../../charts/clickhouse-exporter
+    condition: clickhouseExporter.enabled
+    values:
+      - releases/values-clickhouse-exporter.yaml
+    needs:
+      - prometheus
+      - ingress-nginx
+
+  - name: clickhouse-operator
+    namespace: clickhouse-operator
+    chart: slamdev/altinity-clickhouse-operator
+    version: 0.0.6
+    condition: clickhouseExporter.enabled
+    values:
+      - releases/values-clickhouse-operator.yaml
+    needs:
+      - prometheus
+
+  - name: clickhouse
+    namespace: clickhouse  # clickhouse-operator will watch that namespace
+    chart: charts/clickhouse
+    condition: clickhouseExporter.enabled
+    needs:
+      - clickhouse-operator
+
+  # zookeeper
+  - name: zookeeper-exporter
+    namespace: monitoring
+    chart: ../../charts/zookeeper-exporter
+    condition: zookeeperExporter.enabled
+    needs:
+      - prometheus
+      - ingress-nginx
+    values:
+      - releases/values-zookeeper-operator.yaml
+
+  - name: zookeeper
+    namespace: test
+    chart: bitnami/zookeeper
+    version: 7.6.1
+    condition: zookeeperExporter.enabled
+    values:
+      - releases/values-zookeeper-operator.yaml
+
+  # Agones dashboards
+  - name: agones-dashboards
+    namespace: monitoring
+    chart: ../../charts/agones-dashboards
+    condition: agonesDashboards.enabled
+    needs:
+      - prometheus
+
+  - name: agones
+    namespace: agones
+    chart: agones/agones
+    version: 1.16.0
+    condition: agonesDashboards.enabled
+    needs:
+      - prometheus
+
+  - name: agones-service-monitor
+    namespace: agones
+    chart: charts/agones-service-monitor
+    condition: agonesDashboards.enabled
+    needs:
+      - prometheus
+
+  # rq exporter
+  - name: redis
+    namespace: test
+    chart: bitnami/redis
+    version: 15.5.1
+    condition: rqExporter.enabled
+    values:
+      - releases/values-redis.yaml
+
+  - name: rq-exporter
+    namespace: monitoring
+    chart: ../../charts/rq-exporter
+    condition: rqExporter.enabled
+    needs:
+      - redis
+      - prometheus
+    values:
+      - releases/values-rq-exporter.yaml
+
+environments:
+  default:
+    values:
+      - kafkaExporter:
+          enabled: true
+      - domainExporter:
+          enabled: true
+      - clickhouseExporter:
+          enabled: true
+      - zookeeperExporter:
+          enabled: true
+      - agonesDashboards:
+          enabled: true
+      - rqExporter:
+          enabled: true

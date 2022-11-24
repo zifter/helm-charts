@@ -1,2 +1,5 @@
-Domain exporter metrics is ready to use :)
-For more information visit https://github.com/zifter/helm-domain-exporter
+Congratulations! Domain exporter is ready to use :)
+
+Explore dashboard "Domain Expiration Overview" in Grafana!
+
+For more information visit, please visit https://github.com/zifter/helm-charts

@@ -1,0 +1,26 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "fullnameOverride": {
+            "type": "string"
+        },
+        "labels": {
+            "type": "object",
+            "properties": {
+                "grafana_dashboard": {
+                    "type": "string"
+                }
+            }
+        },
+        "nameOverride": {
+            "type": "string"
+        },
+        "replicaCount": {
+            "type": "integer"
+        },
+        "targetFolder": {
+            "type": "string"
+        }
+    }
+}

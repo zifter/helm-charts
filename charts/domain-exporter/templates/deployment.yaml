@@ -12,8 +12,10 @@ spec:
       {{- include "domain-exporter.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
+        # Roll out new version if configuration file was changed
+        checksum/config: {{ .Values.domains | toYaml | sha256sum }}
+      {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
@@ -35,10 +37,8 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           args:
-            [
-              "--config=/etc/domain-exporter/domains.yaml",
-              "--bind=:9203",
-            ]
+            - --config=/etc/domain-exporter/domains.yaml
+            - --bind=:9203
           ports:
             - name: http
               containerPort: 9203

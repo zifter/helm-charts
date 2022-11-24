@@ -1,0 +1,54 @@
+suite: test deployment
+templates:
+  - deployment.yaml
+tests:
+  - it: render one rq
+    set:
+      rq:
+        - name: cluster
+          host: localhost
+    asserts:
+      - hasDocuments:
+          count: 1
+
+  - it: set image
+    set:
+      image:
+        tag: 1.14.0
+        repository: zifter/my_rq_exporter
+      rq:
+        - name: cluster
+          host: localhost
+    documentIndex: 0
+    release:
+      name: my-release
+    asserts:
+      - isKind:
+          of: Deployment
+      - matchRegex:
+          path: metadata.name
+          pattern: my-release-rq-exporter-cluster
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: zifter/my_rq_exporter:1.14.0
+
+  - it: render two clusters
+    set:
+      image:
+        tag: 1.14.0
+        repository: zifter/my_clickhouse_exporter
+      rq:
+        - name: cluster-1
+          host: localhost
+        - name: cluster-2
+          host: localhost2
+
+    documentIndex: 1
+    release:
+      name: my-release
+    asserts:
+      - isKind:
+          of: Deployment
+      - matchRegex:
+          path: metadata.name
+          pattern: my-release-rq-exporter-cluster-2

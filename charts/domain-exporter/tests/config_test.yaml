@@ -1,0 +1,22 @@
+suite: test config
+templates:
+  - config.yaml
+tests:
+  - it: image
+    set:
+      # List of domains to monitor
+      domains:
+        - google.com
+        - reddit.com
+    asserts:
+      - isKind:
+          of: ConfigMap
+      - matchRegex:
+          path: metadata.name
+          pattern: -domain-exporter-domains$
+      - equal:
+          path: data.domains\.yaml
+          value: |-
+            domains:
+              - google.com
+              - reddit.com
