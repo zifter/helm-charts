@@ -122,6 +122,9 @@
                 },
                 "interval": {
                     "type": "string"
+                },
+                "labels": {
+                    "type": "object"
                 }
             }
         },

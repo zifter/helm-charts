@@ -6,6 +6,9 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "domain-exporter.labels" . | nindent 4 }}
+    {{- if .Values.metrics.labels }}
+    {{ toYaml .Values.metrics.labels | indent 4}}
+    {{- end }}
 spec:
   selector:
     matchLabels:
