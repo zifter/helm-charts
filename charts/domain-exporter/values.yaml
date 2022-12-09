@@ -114,7 +114,7 @@ metrics:
   enabled: true
   # Interval between metrics scraping
   interval: 1m
-  
+
   # Set labels for the ServiceMonitor, use this to define your scrape label for Prometheus Operator
   # labels:
 
