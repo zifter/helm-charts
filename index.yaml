@@ -464,6 +464,26 @@ entries:
   rq-exporter:
   - apiVersion: v2
     appVersion: v1.9.2
+    created: "2026-05-06T16:11:45.334858084Z"
+    description: A Helm chart of rq exporter. Provide prometheus metrics, alerts and
+      dashboard.
+    digest: 63c5ccdc397eefa82a35e2f42df74a8460f4c11320bdda4b26d563c968a570f2
+    home: https://github.com/zifter/helm-charts
+    icon: https://artifacthub.io/static/media/placeholder_pkg_helm.png
+    maintainers:
+    - email: zifter.ai+github@gmail.com
+      name: zifter
+      url: https://github.com/zifter
+    name: rq-exporter
+    sources:
+    - https://github.com/zifter/helm-charts/tree/main/charts/rq-exporter
+    - https://github.com/mdawar/rq-exporter
+    type: application
+    urls:
+    - https://github.com/zifter/helm-charts/releases/download/rq-exporter-0.2.3/rq-exporter-0.2.3.tgz
+    version: 0.2.3
+  - apiVersion: v2
+    appVersion: v1.9.2
     created: "2022-04-21T16:38:35.177993963Z"
     description: A Helm chart of rq exporter. Provide prometheus metrics, alerts and
       dashboard.
@@ -610,4 +630,4 @@ entries:
     urls:
     - https://github.com/zifter/helm-charts/releases/download/zookeeper-exporter-0.1.0/zookeeper-exporter-0.1.0.tgz
     version: 0.1.0
-generated: "2022-12-12T16:10:41.311203366Z"
+generated: "2026-05-06T16:11:45.33494716Z"
