@@ -45,26 +45,26 @@ spec:
             - {{ .port | default 6379 | quote }}
             - "--redis-db"
             - {{ .index | default 0 | quote }}
-            - {{- if .sentinel_host }}
+            {{- if .sentinel_host }}
             - "--sentinel-host"
             - {{ .sentinel_host | quote }}
-            - {{- end }}
-            - {{- if .sentinel_port }}
+            {{- end }}
+            {{- if .sentinel_port }}
             - "--sentinel-port"
             - {{ .sentinel_port | quote }}
-            - {{- end }}
-            - {{- if .sentinel_master }}
+            {{- end }}
+            {{- if .sentinel_master }}
             - "--sentinel-master"
             - {{ .sentinel_master | quote }}
-            - {{- end }}
-            - {{- if $.Values.logging.level }}
+            {{- end }}
+            {{- if $.Values.logging.level }}
             - "--log-level"
             - {{ $.Values.logging.level | quote }}
-            - {{- end }}
-            - {{- if $.Values.logging.format }}
+            {{- end }}
+            {{- if $.Values.logging.format }}
             - "--log-format"
             - {{ $.Values.logging.format | quote }}
-            - {{- end }}
+            {{- end }}
           ports:
             - name: http
               containerPort: 9726
